@@ -179,12 +179,19 @@ body {
    color: #000000;
 }
 
-/* 5 colonne fornitori su una riga per stampa più leggibile */
+/* MODIFICATO: Layout verticale per card destinazioni */
 .suppliers-container {
-   display: grid;
-   grid-template-columns: repeat(5, 1fr);
+   display: flex;
+   flex-direction: column;
    gap: 10px;
    margin-bottom: 20px;
+}
+
+.suppliers-row {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 10px;
+   margin-bottom: 10px;
 }
 
 .supplier-card {
@@ -204,6 +211,9 @@ body {
    padding: 12px;
    page-break-inside: avoid;
    min-height: 540px;
+   grid-column: span 4;
+   max-width: 300px;
+   margin: 0 auto;
 }
 
 /* COLORI COMBINAZIONI */
@@ -653,10 +663,21 @@ body {
        color: #000000 !important;
    }
    
-   /* 4 COLONNE CON CARATTERI NORMALI */
+   /* MODIFICATO: Layout stampa verticale */
    .suppliers-container {
+       flex-direction: column !important;
+   }
+   
+   .suppliers-row {
        grid-template-columns: repeat(4, 1fr) !important;
        gap: 8px !important;
+       page-break-inside: avoid;
+   }
+   
+   .altro-dest-card {
+       grid-column: span 1 !important;
+       max-width: none !important;
+       margin: 0 !important;
    }
    
    .supplier-card,
@@ -1363,7 +1384,7 @@ $(document).ready(function() {
                        <span class="form-label">Dest. Succo 1ª:</span>
                        <div class="form-input">
                            <select class="destinazione-prima" onchange="updateDestinationCard(${index})">
-                               <option value="">Seleziona destinazione</option>
+                               <option value="">Destinazione succo 1ª</option>
                                <option value="NAT IN TINI">NAT IN TINI</option>
                                <option value="PET 100">PET 100</option>
                                <option value="PET 200">PET 200</option>
@@ -1526,7 +1547,7 @@ $(document).ready(function() {
                    <span class="form-label dest-label destinazione-label-altra">Dest. Succo 1ª:</span>
                    <div class="form-input">
                        <select class="destinazione-prima-altra" onchange="updateAltraDestinazioneBioStyles(${index})">
-                           <option value="">Seleziona destinazione</option>
+                           <option value="">Destinazione succo 1ª</option>
                            <option value="NAT IN TINI">NAT IN TINI</option>
                            <option value="PET 100">PET 100</option>
                            <option value="PET 200">PET 200</option>
@@ -1641,6 +1662,25 @@ $(document).ready(function() {
                </div>
            </div>
        `;
+   }
+
+   // Funzione per aggiungere una nuova riga di fornitori
+   function addSuppliersRow() {
+       const newRow = $('<div class="suppliers-row"></div>');
+       $('#suppliers-container').append(newRow);
+       return newRow;
+   }
+
+   // Funzione per ottenere o creare l'ultima riga con spazio disponibile
+   function getOrCreateSuppliersRow() {
+       let lastRow = $('#suppliers-container .suppliers-row').last();
+       
+       // Se non ci sono righe o l'ultima riga ha già 4 fornitori, crea una nuova riga
+       if (lastRow.length === 0 || lastRow.find('.supplier-card').length >= 4) {
+           lastRow = addSuppliersRow();
+       }
+       
+       return lastRow;
    }
 
    // MODIFICATA: Funzione per aggiornare i colori bio per altra destinazione - tutti i campi rossi quando Bio = SI
@@ -2240,8 +2280,28 @@ $(document).ready(function() {
            updateSummarySection();
            updateAllTransferOptions();
            updateSuppliersCount();
+           reorganizeSuppliers();
        }
    };
+
+   // NUOVA: Funzione per riorganizzare i fornitori nelle righe
+   function reorganizeSuppliers() {
+       const suppliers = $('.supplier-card').detach();
+       $('.suppliers-row').remove();
+       
+       let currentRow = null;
+       let suppliersInRow = 0;
+       
+       suppliers.each(function() {
+           if (suppliersInRow === 0 || suppliersInRow >= 4) {
+               currentRow = addSuppliersRow();
+               suppliersInRow = 0;
+           }
+           
+           currentRow.append($(this));
+           suppliersInRow++;
+       });
+   }
 
    // MODIFICATA: Gestione rimozione altra destinazione con rinumerazione e reset provenienza
    window.removeAltraDestinazione = function(index) {
@@ -3010,17 +3070,28 @@ $(document).ready(function() {
        // Rimuovi fornitori e altre destinazioni esistenti
        $('.supplier-card').remove();
        $('.altro-dest-card').remove();
+       $('.suppliers-row').remove();
        supplierCount = 0;
        altraDestinazioneCount = 0;
        
        // Ripristina fornitori
        if (data.fornitori && data.fornitori.length > 0) {
+           let currentRow = null;
+           let suppliersInRow = 0;
+           
            data.fornitori.forEach(fornitore => {
                const index = fornitore.supplierIndex;
                if (index > supplierCount) supplierCount = index;
                
+               // Gestisci layout a righe
+               if (suppliersInRow === 0 || suppliersInRow >= 4) {
+                   currentRow = addSuppliersRow();
+                   suppliersInRow = 0;
+               }
+               
                const newCard = createSupplierCard(index);
-               $('#suppliers-container').append(newCard);
+               currentRow.append(newCard);
+               suppliersInRow++;
                
                const card = $(`.supplier-card[data-supplier-index="${index}"]`);
                
@@ -3238,8 +3309,12 @@ $(document).ready(function() {
        }
        
        supplierCount++;
+       
+       // Ottieni o crea riga con spazio disponibile
+       const targetRow = getOrCreateSuppliersRow();
+       
        const newCard = createSupplierCard(supplierCount);
-       $('#suppliers-container').append(newCard);
+       targetRow.append(newCard);
        
        updateSuppliersCount();
        updateCombinazioneOptions();
@@ -3303,7 +3378,7 @@ $(document).ready(function() {
    initCurrentDate();
    updateSuppliersCount();
 
-   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione con destinazione singola, card destinazione, provenienza e colori bio completi');
+   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Versione con layout verticale per carte destinazioni e "Destinazione succo 1ª" come prima opzione');
 });
 </script>
 </body>
