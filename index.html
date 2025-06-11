@@ -179,30 +179,37 @@ body {
    color: #000000;
 }
 
-/* NUOVO LAYOUT GRIGLIA 4x2 */
-.main-grid {
+/* NUOVO: Layout griglia 4x2 per 8 posizioni */
+.grid-container {
    display: grid;
    grid-template-columns: repeat(4, 1fr);
-   grid-template-rows: auto auto;
+   grid-template-rows: repeat(2, 1fr);
    gap: 10px;
    margin-bottom: 20px;
+   min-height: 600px;
 }
 
-.grid-section-upper {
-   grid-column: 1 / -1;
-   display: grid;
-   grid-template-columns: repeat(4, 1fr);
-   gap: 10px;
-   border-bottom: 3px solid #1e3c72;
-   padding-bottom: 10px;
-   margin-bottom: 10px;
+.grid-item {
+   border: 2px dashed #ccc;
+   border-radius: 8px;
+   padding: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #f8f9fa;
+   position: relative;
 }
 
-.grid-section-lower {
-   grid-column: 1 / -1;
-   display: grid;
-   grid-template-columns: repeat(4, 1fr);
-   gap: 10px;
+.grid-item.occupied {
+   border: none;
+   padding: 0;
+   background-color: transparent;
+}
+
+.grid-placeholder {
+   color: #aaa;
+   font-style: italic;
+   text-align: center;
 }
 
 .supplier-card {
@@ -210,8 +217,10 @@ body {
    border: 1px solid #000000;
    border-radius: 5px;
    padding: 12px;
-   page-break-inside: avoid;
-   min-height: 540px;
+   width: 100%;
+   height: 100%;
+   min-height: 280px;
+   overflow-y: auto;
 }
 
 /* Stile per colonna altra destinazione */
@@ -220,8 +229,10 @@ body {
    border: 2px solid #007bff;
    border-radius: 5px;
    padding: 12px;
-   page-break-inside: avoid;
-   min-height: 540px;
+   width: 100%;
+   height: 100%;
+   min-height: 280px;
+   overflow-y: auto;
 }
 
 /* COLORI COMBINAZIONI */
@@ -246,7 +257,7 @@ body {
    padding: 6px;
    text-align: center;
    font-weight: bold;
-   font-size: 18px;
+   font-size: 16px;
    margin: -12px -12px 12px -12px;
    border-bottom: 1px solid #000000;
 }
@@ -257,7 +268,7 @@ body {
    padding: 6px;
    text-align: center;
    font-weight: bold;
-   font-size: 18px;
+   font-size: 16px;
    margin: -12px -12px 12px -12px;
    border-bottom: 1px solid #000000;
 }
@@ -277,7 +288,7 @@ body {
 .form-row {
    display: flex;
    justify-content: space-between;
-   margin-bottom: 6px;
+   margin-bottom: 4px;
    align-items: center;
 }
 
@@ -285,11 +296,11 @@ body {
    font-weight: bold;
    color: #000000;
    width: 45%;
-   font-size: 14px;
+   font-size: 11px;
 }
 
 .form-label.dest-label {
-   font-size: 12px;
+   font-size: 10px;
 }
 
 .form-input {
@@ -302,12 +313,12 @@ body {
    width: 100%;
    border: 1px solid #000000;
    border-radius: 4px;
-   padding: 4px;
-   font-size: 12px;
+   padding: 2px;
+   font-size: 10px;
 }
 
 .form-input textarea {
-   min-height: 45px;
+   min-height: 30px;
    resize: vertical;
 }
 
@@ -365,7 +376,7 @@ body {
 
 .section-divider {
    border-bottom: 1px solid #6c757d;
-   margin: 6px 0;
+   margin: 4px 0;
 }
 
 /* Sezioni totali compatte con giallo uguale alle altre caselle gialle */
@@ -447,21 +458,21 @@ body {
 }
 
 .transfer-details, .distribution-details {
-   font-size: 11px;
+   font-size: 9px;
    color: #000000;
-   margin-top: 3px;
+   margin-top: 2px;
    background-color: #d4edda;
-   padding: 3px;
+   padding: 2px;
    border-radius: 3px;
    border: 1px solid #28a745;
 }
 
 .combination-details {
-   font-size: 10px;
+   font-size: 8px;
    color: #856404;
-   margin-top: 3px;
+   margin-top: 2px;
    background-color: #fff3cd;
-   padding: 4px;
+   padding: 3px;
    border-radius: 3px;
    border: 1px solid #ffc107;
    line-height: 1.2;
@@ -492,71 +503,71 @@ body {
 .destination-card {
    background-color: #f8f9fa;
    border: 2px solid #17a2b8;
-   border-radius: 8px;
-   padding: 10px;
-   margin-top: 8px;
+   border-radius: 6px;
+   padding: 6px;
+   margin-top: 6px;
 }
 
 .destination-header {
    background: #17a2b8;
    color: white;
-   padding: 4px 8px;
-   border-radius: 4px;
+   padding: 3px 6px;
+   border-radius: 3px;
    font-weight: bold;
-   font-size: 12px;
-   margin-bottom: 8px;
+   font-size: 10px;
+   margin-bottom: 6px;
    text-align: center;
 }
 
 .remaining-qty {
    background-color: #e7f3ff;
    border: 1px solid #2a5298;
-   padding: 3px;
+   padding: 2px;
    border-radius: 3px;
    font-weight: bold;
    text-align: center;
    color: #1e3c72;
-   font-size: 11px;
-   margin-bottom: 6px;
+   font-size: 9px;
+   margin-bottom: 4px;
 }
 
 .transfer-section {
    background-color: #fff3cd;
    border: 1px solid #ffc107;
    border-radius: 3px;
-   padding: 4px;
-   margin-top: 4px;
+   padding: 3px;
+   margin-top: 3px;
 }
 
 .transfer-row {
    display: flex;
    align-items: center;
-   gap: 3px;
+   gap: 2px;
    flex-wrap: wrap;
 }
 
 .transfer-row .form-label {
-   min-width: 60px;
+   min-width: 40px;
    margin-bottom: 0;
-   font-size: 10px;
+   font-size: 8px;
    flex-shrink: 0;
 }
 
 .transfer-row .transfer-destination {
-   min-width: 80px;
+   min-width: 60px;
    flex: 1;
-   font-size: 10px;
+   font-size: 8px;
 }
 
 .transfer-row .transfer-qty {
-   width: 40px;
-   font-size: 10px;
-   padding: 2px;
+   width: 30px;
+   font-size: 8px;
+   padding: 1px;
 }
 
 .transfer-row .btn {
-   padding: 2px 6px;
-   font-size: 9px;
+   padding: 1px 4px;
+   font-size: 7px;
    margin: 0;
    white-space: nowrap;
 }
@@ -589,24 +600,24 @@ body {
 .provenienza-info {
    background-color: #e8f5e8;
    border: 1px solid #28a745;
-   padding: 4px;
+   padding: 3px;
    border-radius: 3px;
-   font-size: 10px;
+   font-size: 8px;
    color: #155724;
-   margin-bottom: 6px;
+   margin-bottom: 4px;
 }
 
 /* REGOLE DI STAMPA COMPLETE E CORRETTE */
 @media print {
    * {
-       font-size: 16px !important;
+       font-size: 14px !important;
        line-height: 1.2 !important;
    }
    
    body { 
        margin: 8mm !important;
        background-color: #f5f5f5 !important;
-       font-size: 16px !important;
+       font-size: 14px !important;
        line-height: 1.2 !important;
        color: #000000 !important;
    }
@@ -627,80 +638,63 @@ body {
        background: #1e3c72 !important;
        color: #ffffff !important;
        border: 2px solid #000000 !important;
-       padding: 20px !important;
-       margin-bottom: 15px !important;
+       padding: 15px !important;
+       margin-bottom: 10px !important;
    }
    
    .header h1 {
-       font-size: 28px !important;
+       font-size: 24px !important;
        color: #ffffff !important;
        font-weight: bold !important;
-       margin-bottom: 8px !important;
+       margin-bottom: 6px !important;
    }
    
    .header .subtitle {
-       font-size: 22px !important;
+       font-size: 18px !important;
        color: #ffffff !important;
-       margin-bottom: 8px !important;
+       margin-bottom: 6px !important;
    }
    
    .header-info {
-       font-size: 18px !important;
+       font-size: 16px !important;
        color: #ffffff !important;
    }
    
    .header-info div {
-       font-size: 18px !important;
+       font-size: 16px !important;
    }
    
    .totals-section {
        background-color: #ffc107 !important;
        border: 2px solid #000000 !important;
-       padding: 15px !important;
-       margin-bottom: 15px !important;
+       padding: 12px !important;
+       margin-bottom: 10px !important;
    }
    
    .total-value {
-       font-size: 24px !important;
+       font-size: 20px !important;
        color: #000000 !important;
        font-weight: bold !important;
    }
    
    .total-label {
-       font-size: 16px !important;
+       font-size: 14px !important;
        color: #000000 !important;
    }
    
-   /* Layout griglia in stampa */
-   .main-grid {
-       display: grid !important;
-       grid-template-columns: repeat(4, 1fr) !important;
-       gap: 8px !important;
-   }
-   
-   .grid-section-upper {
-       display: grid !important;
-       grid-template-columns: repeat(4, 1fr) !important;
-       gap: 8px !important;
-       border-bottom: 3px solid #000000 !important;
-       padding-bottom: 10px !important;
-       margin-bottom: 10px !important;
-   }
-   
-   .grid-section-lower {
-       display: grid !important;
-       grid-template-columns: repeat(4, 1fr) !important;
-       gap: 8px !important;
+   .grid-container {
+       gap: 6px !important;
+       min-height: 500px !important;
    }
    
    .supplier-card,
    .altro-dest-card {
-       font-size: 16px !important;
-       padding: 8px !important;
+       font-size: 14px !important;
+       padding: 6px !important;
        background-color: #e9ecef !important;
        border: 1px solid #000000 !important;
        page-break-inside: avoid;
-       min-height: auto !important;
+       min-height: 240px !important;
    }
    
    .altro-dest-card {
@@ -727,9 +721,9 @@ body {
    .altro-dest-header {
        background: #6c757d !important;
        color: #ffffff !important;
-       font-size: 18px !important;
+       font-size: 16px !important;
        font-weight: bold !important;
-       padding: 6px !important;
+       padding: 4px !important;
        border-bottom: 1px solid #000000 !important;
        text-align: center !important;
    }
@@ -754,41 +748,34 @@ body {
    }
    
    .form-row {
-       margin-bottom: 4px !important;
-       font-size: 16px !important;
+       margin-bottom: 3px !important;
+       font-size: 14px !important;
    }
    
    .form-label {
-       font-size: 14px !important;
+       font-size: 11px !important;
        font-weight: bold !important;
        color: #000000 !important;
    }
    
    .form-label.dest-label {
-       font-size: 12px !important;
+       font-size: 10px !important;
    }
    
    .form-input {
-       font-size: 16px !important;
+       font-size: 14px !important;
    }
    
    .form-input input,
    .form-input select,
    .form-input textarea,
    .form-input div {
-       font-size: 12px !important;
-       padding: 3px !important;
+       font-size: 10px !important;
+       padding: 2px !important;
        border: 1px solid #000000 !important;
        background-color: #ffffff !important;
        color: #000000 !important;
        min-height: auto !important;
-   }
-   
-   .orario-fine-display {
-       font-size: 12px !important;
-       padding: 3px !important;
-       min-height: auto !important;
-       line-height: 1.2 !important;
    }
    
    .calculated-field,
@@ -796,14 +783,14 @@ body {
        background-color: #e7f3ff !important;
        font-weight: bold !important;
        border: 1px solid #2a5298 !important;
-       font-size: 12px !important;
+       font-size: 10px !important;
    }
    
    .bio-red-field {
        color: #dc3545 !important;
        font-weight: bold !important;
        border: 1px solid #dc3545 !important;
-       font-size: 12px !important;
+       font-size: 10px !important;
        background-color: #ffffff !important;
    }
    
@@ -811,48 +798,20 @@ body {
        color: #000000 !important;
        font-weight: bold !important;
        border: 1px solid #000000 !important;
-       font-size: 12px !important;
+       font-size: 10px !important;
        background-color: #ffffff !important;
    }
    
    .bio-red-text {
        color: #dc3545 !important;
        font-weight: bold !important;
-       font-size: 14px !important;
+       font-size: 11px !important;
    }
    
    .bio-black-text {
        color: #000000 !important;
        font-weight: bold !important;
-       font-size: 14px !important;
-   }
-   
-   .supplier-card .certificazione-prodotto.bio-red-field,
-   .supplier-card .varieta-prodotto.bio-red-field,
-   .supplier-card .linea-trasformazione.bio-red-field,
-   .supplier-card .bio-prima.bio-red-field {
-       color: #dc3545 !important;
-       border-color: #dc3545 !important;
-       font-weight: bold !important;
-   }
-   
-   .supplier-card .certificazione-prodotto.bio-black-field,
-   .supplier-card .varieta-prodotto.bio-black-field,
-   .supplier-card .linea-trasformazione.bio-black-field,
-   .supplier-card .bio-prima.bio-black-field {
-       color: #000000 !important;
-       border-color: #000000 !important;
-       font-weight: bold !important;
-   }
-   
-   .supplier-card .form-label.bio-red-text {
-       color: #dc3545 !important;
-       font-weight: bold !important;
-   }
-   
-   .supplier-card .form-label.bio-black-text {
-       color: #000000 !important;
-       font-weight: bold !important;
+       font-size: 11px !important;
    }
    
    .combination-result {
@@ -860,13 +819,13 @@ body {
        border: 2px solid #ffc107 !important;
        color: #856404 !important;
        font-weight: bold !important;
-       font-size: 12px !important;
+       font-size: 10px !important;
    }
    
    .received-transfer {
        background-color: #d4edda !important;
        border: 2px solid #28a745 !important;
-       font-size: 12px !important;
+       font-size: 10px !important;
    }
    
    .summary-section {
@@ -877,25 +836,25 @@ body {
    .summary-box {
        background: #ffc107 !important;
        border: 2px solid #000000 !important;
-       padding: 15px !important;
+       padding: 12px !important;
    }
    
    .summary-title {
-       font-size: 20px !important;
+       font-size: 18px !important;
        color: #000000 !important;
        background-color: rgba(255, 255, 255, 0.3) !important;
-       padding: 6px !important;
+       padding: 4px !important;
        font-weight: bold !important;
    }
    
    .summary-item {
-       font-size: 14px !important;
+       font-size: 12px !important;
        color: #000000 !important;
-       margin-bottom: 4px !important;
+       margin-bottom: 3px !important;
    }
    
    .summary-value {
-       font-size: 16px !important;
+       font-size: 14px !important;
        color: #000000 !important;
        background-color: rgba(255, 255, 255, 0.4) !important;
        border: 1px solid #000000 !important;
@@ -904,63 +863,48 @@ body {
    
    .summary-input,
    .summary-textarea {
-       font-size: 12px !important;
+       font-size: 10px !important;
        border: 1px solid #000000 !important;
        background-color: rgba(255, 255, 255, 0.8) !important;
        color: #000000 !important;
-       padding: 3px !important;
+       padding: 2px !important;
    }
    
    .transfer-details,
    .distribution-details {
-       font-size: 10px !important;
+       font-size: 8px !important;
        color: #000000 !important;
        background-color: #d4edda !important;
        border: 1px solid #28a745 !important;
-       padding: 3px !important;
+       padding: 2px !important;
    }
    
    .combination-details {
-       font-size: 10px !important;
+       font-size: 8px !important;
        color: #856404 !important;
        background-color: #fff3cd !important;
        border: 1px solid #ffc107 !important;
-       padding: 3px !important;
+       padding: 2px !important;
    }
    
    .section-divider {
        border-bottom: 1px solid #000000 !important;
-       margin: 4px 0 !important;
+       margin: 3px 0 !important;
    }
    
    .concentrato-field {
        background-color: #e7f3ff !important;
        font-weight: bold !important;
        border: 1px solid #2a5298 !important;
-       font-size: 12px !important;
+       font-size: 10px !important;
    }
    
-   span, div, p, strong, small {
-       font-size: 12px !important;
-   }
-   
-   .supplier-name {
-       font-size: 18px !important;
-   }
-   
-   .remaining-value {
-       font-size: 12px !important;
-   }
-   
-   #current-date,
-   #selected-agrume,
-   #suppliers-count,
-   #last-revision {
-       font-size: 18px !important;
+   .grid-placeholder {
+       display: none !important;
    }
    
    @page {
-       margin: 10mm;
+       margin: 8mm;
        size: A4 landscape;
    }
  }
@@ -974,7 +918,7 @@ body {
        <div class="header-info">
            <div><strong>Data:</strong> <span id="current-date"></span></div>
            <div><strong>Agrume:</strong> <span id="selected-agrume">N/D</span></div>
-           <div><strong>Fornitori:</strong> <span id="suppliers-count">0</span></div>
+           <div><strong>Elementi:</strong> <span id="elements-count">0/8</span></div>
        </div>
        <div style="margin-top: 10px; font-size: 16px;">
            <strong>Generato:</strong> <span id="last-revision"></span>
@@ -1093,13 +1037,32 @@ body {
        </div>
    </div>
 
-   <!-- Griglia principale 4x2 -->
-   <div class="main-grid" id="main-grid">
-       <div class="grid-section-upper" id="upper-section">
-           <!-- Fornitori vanno qui -->
+   <!-- Container Griglia 4x2 -->
+   <div class="grid-container" id="grid-container">
+       <!-- 8 posizioni della griglia -->
+       <div class="grid-item" data-position="1">
+           <div class="grid-placeholder">Posizione 1</div>
        </div>
-       <div class="grid-section-lower" id="lower-section">
-           <!-- Altre destinazioni vanno qui -->
+       <div class="grid-item" data-position="2">
+           <div class="grid-placeholder">Posizione 2</div>
+       </div>
+       <div class="grid-item" data-position="3">
+           <div class="grid-placeholder">Posizione 3</div>
+       </div>
+       <div class="grid-item" data-position="4">
+           <div class="grid-placeholder">Posizione 4</div>
+       </div>
+       <div class="grid-item" data-position="5">
+           <div class="grid-placeholder">Posizione 5</div>
+       </div>
+       <div class="grid-item" data-position="6">
+           <div class="grid-placeholder">Posizione 6</div>
+       </div>
+       <div class="grid-item" data-position="7">
+           <div class="grid-placeholder">Posizione 7</div>
+       </div>
+       <div class="grid-item" data-position="8">
+           <div class="grid-placeholder">Posizione 8</div>
        </div>
    </div>
 
@@ -1115,7 +1078,8 @@ body {
 $(document).ready(function() {
    let supplierCount = 0;
    let altraDestinazioneCount = 0;
-   let programData = {};
+   let elementsCount = 0;
+   const maxElements = 8;
 
    // Variabili per le combinazioni con colori
    let combinationData = {
@@ -1132,12 +1096,6 @@ $(document).ready(function() {
    
    // Tracciamento provenienza per altre destinazioni
    let provenienzaData = {};
-
-   // Tracciamento posizionamento griglia
-   let gridPositions = {
-       suppliers: [], // posizioni dei fornitori
-       destinations: [] // posizioni delle destinazioni
-   };
 
    // Definizione varietà per ogni tipo di agrume
    const varietyOptions = {
@@ -1190,6 +1148,42 @@ $(document).ready(function() {
        'BIRILLATRICI': 26.60,
        'GOE EST/BIRILLATRICI': 25.60
    };
+
+   // Funzione per trovare la prossima posizione libera
+   function getNextAvailablePosition() {
+       for (let i = 1; i <= maxElements; i++) {
+           const gridItem = $(`.grid-item[data-position="${i}"]`);
+           if (!gridItem.hasClass('occupied')) {
+               return i;
+           }
+       }
+       return null; // Nessuna posizione libera
+   }
+
+   // Funzione per occupare una posizione nella griglia
+   function occupyGridPosition(position, element) {
+       const gridItem = $(`.grid-item[data-position="${position}"]`);
+       gridItem.addClass('occupied');
+       gridItem.empty();
+       gridItem.append(element);
+       elementsCount++;
+       updateElementsCount();
+   }
+
+   // Funzione per liberare una posizione nella griglia
+   function freeGridPosition(position) {
+       const gridItem = $(`.grid-item[data-position="${position}"]`);
+       gridItem.removeClass('occupied');
+       gridItem.empty();
+       gridItem.append(`<div class="grid-placeholder">Posizione ${position}</div>`);
+       elementsCount--;
+       updateElementsCount();
+   }
+
+   // Funzione per aggiornare il contatore elementi
+   function updateElementsCount() {
+       $('#elements-count').text(`${elementsCount}/${maxElements}`);
+   }
 
    // Funzione per calcolare la quantità concentrato
    function calculateConcentrato(quantita, brix) {
@@ -1254,82 +1248,7 @@ $(document).ready(function() {
        }
    };
 
-   // NUOVA: Funzione per calcolare la posizione nella griglia per un nuovo elemento
-   function calculateGridPosition(type) {
-       if (type === 'supplier') {
-           // I fornitori vanno nella sezione superiore, nelle prime 4 posizioni disponibili
-           for (let i = 0; i < 4; i++) {
-               if (!gridPositions.suppliers.includes(i)) {
-                   gridPositions.suppliers.push(i);
-                   return { section: 'upper', position: i };
-               }
-           }
-           return null; // Griglia piena
-       } else if (type === 'destination') {
-           // Le destinazioni seguono questa logica:
-           // 1. Prima sotto i fornitori esistenti (stessa colonna)
-           // 2. Poi nelle colonne libere della sezione superiore
-           // 3. Infine nella sezione inferiore
-           
-           const suppliersCount = gridPositions.suppliers.length;
-           const destinationsCount = gridPositions.destinations.length;
-           
-           if (destinationsCount < suppliersCount) {
-               // Prima sotto i fornitori esistenti
-               const position = gridPositions.suppliers[destinationsCount];
-               gridPositions.destinations.push(position);
-               return { section: 'lower', position: position };
-           } else if (suppliersCount < 4) {
-               // Poi nelle colonne libere della sezione superiore
-               for (let i = 0; i < 4; i++) {
-                   if (!gridPositions.suppliers.includes(i) && !gridPositions.destinations.includes(i)) {
-                       gridPositions.destinations.push(i);
-                       return { section: 'upper', position: i };
-                   }
-               }
-           }
-           
-           // Infine nella sezione inferiore, nelle posizioni libere
-           for (let i = 0; i < 4; i++) {
-               if (!gridPositions.destinations.includes(i)) {
-                   gridPositions.destinations.push(i);
-                   return { section: 'lower', position: i };
-               }
-           }
-           
-           return null; // Griglia piena
-       }
-   }
-
-   // NUOVA: Funzione per posizionare un elemento nella griglia
-   function placeInGrid(element, gridPosition) {
-       if (!gridPosition) return false;
-       
-       const targetSection = gridPosition.section === 'upper' ? '#upper-section' : '#lower-section';
-       const position = gridPosition.position;
-       
-       // Rimuovi l'elemento dalla sua posizione attuale se esiste
-       element.detach();
-       
-       // Trova la posizione corretta nella griglia
-       const sectionElement = $(targetSection);
-       const children = sectionElement.children();
-       
-       if (children.length === 0 || position === 0) {
-           sectionElement.prepend(element);
-       } else if (position >= children.length) {
-           sectionElement.append(element);
-       } else {
-           element.insertAfter(children.eq(position - 1));
-       }
-       
-       // Applica CSS per la posizione specifica nella griglia
-       element.css('grid-column', position + 1);
-       
-       return true;
-   }
-
-   // Crea card fornitore - MODIFICATA con logica griglia
+   // Crea card fornitore
    function createSupplierCard(index) {
        const agrume = $('#tipo-agrume-giornaliero').val();
        const defaultYield = 30;
@@ -1339,12 +1258,12 @@ $(document).ready(function() {
            '<option value="">Seleziona prima l\'agrume</option>';
 
        return $(`
-           <div class="supplier-card" data-supplier-index="${index}">
+           <div class="supplier-card" data-supplier-index="${index}" data-grid-position="">
                <div class="supplier-header">F${index} - <span class="supplier-name">Nuovo Fornitore</span></div>
                
                <!-- Dati base -->
                <div class="form-row">
-                   <span class="form-label">Nome Fornitore:</span>
+                   <span class="form-label">Nome:</span>
                    <div class="form-input">
                        <select class="nome-fornitore" onchange="updateSupplierName(${index})">
                            <option value="">Seleziona fornitore</option>
@@ -1361,7 +1280,7 @@ $(document).ready(function() {
                            <option value="UNIONBERG">UNIONBERG</option>
                            <option value="ALTRO">ALTRO</option>
                        </select>
-                       <input type="text" class="altro-fornitore hidden-field" placeholder="Specifica altro fornitore" style="margin-top: 3px;">
+                       <input type="text" class="altro-fornitore hidden-field" placeholder="Specifica" style="margin-top: 2px;">
                    </div>
                </div>
 
@@ -1392,7 +1311,7 @@ $(document).ready(function() {
                    <span class="form-label">Certificazione:</span>
                    <div class="form-input">
                        <select class="certificazione-prodotto" onchange="updateBioStyles(${index})">
-                           <option value="">Seleziona certificazione</option>
+                           <option value="">Seleziona</option>
                            <option value="BIO EU">BIO EU</option>
                            <option value="BIO DEM">BIO DEM</option>
                            <option value="BIO NTD">BIO NTD</option>
@@ -1402,7 +1321,6 @@ $(document).ready(function() {
                            <option value="CONVENZIONALE">CONVENZIONALE</option>
                            <option value="ALTRO">ALTRO</option>
                        </select>
-                       <input type="text" class="altra-certificazione hidden-field" placeholder="Specifica altra certificazione" style="margin-top: 3px;">
                    </div>
                </div>
 
@@ -1413,14 +1331,13 @@ $(document).ready(function() {
                            <option value="">Seleziona varietà</option>
                            ${varietyOptionsHtml}
                        </select>
-                       <input type="text" class="altra-varieta hidden-field" placeholder="Specifica altra varietà" style="margin-top: 3px;">
                    </div>
                </div>
 
                <div class="form-row">
                    <span class="form-label">Linea:</span>
                    <div class="form-input">
-                       <select class="linea-trasformazione" onchange="updateBioStyles(${index}); updateYieldByLine(${index}); calculateSupplier(${index}); $(this).closest('.supplier-card').find('.orario-inizio').removeData('manually-changed');">
+                       <select class="linea-trasformazione" onchange="updateBioStyles(${index}); updateYieldByLine(${index}); calculateSupplier(${index});">
                            <option value="">Seleziona linea</option>
                            <option value="GOE EST/400">GOE EST/400</option>
                            <option value="BOE/1100">BOE/1100</option>
@@ -1444,26 +1361,26 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Inizio:</span>
                    <div class="form-input">
-                       <input type="time" class="orario-inizio" onchange="calculateEndTime(${index}); $(this).data('manually-changed', true);">
+                       <input type="time" class="orario-inizio" onchange="calculateEndTime(${index});">
                    </div>
                </div>
 
                <div class="form-row">
                    <span class="form-label">Fine:</span>
                    <div class="form-input">
-                       <div class="orario-fine-display calculated-field"></div>
+                       <div class="orario-fine-display calculated-field" style="font-size: 9px; padding: 2px;"></div>
+                   </div>
+               </div>
+
+               <!-- Rese nascoste -->
+               <div class="form-row hidden-field">
+                   <span class="form-label">Resa Succo 1ª (%):</span>
+                   <div class="form-input">
+                       <input type="number" class="resa-prima calculated-field" step="0.01" min="0" max="100" value="${defaultYield}" readonly>
                    </div>
                </div>
 
                <div class="section-divider"></div>
-
-               <!-- Rese -->
-               <div class="form-row hidden-field">
-                   <span class="form-label">Resa Succo 1ª (%):</span>
-                   <div class="form-input">
-                       <input type="number" class="resa-prima calculated-field" step="0.01" min="0" max="100" value="${defaultYield}" readonly onchange="calculateSupplier(${index})">
-                   </div>
-               </div>
 
                <!-- Quantità Succo 1ª -->
                <div class="form-row">
@@ -1475,12 +1392,12 @@ $(document).ready(function() {
                    </div>
                </div>
 
-               <!-- Card Destinazione Succo 1ª -->
+               <!-- Card Destinazione Succo 1ª compatta -->
                <div class="destination-card">
                    <div class="destination-header">Destinazione Succo 1ª</div>
                    
                    <div class="form-row">
-                       <span class="form-label">Dest. Succo 1ª:</span>
+                       <span class="form-label dest-label">Dest.:</span>
                        <div class="form-input">
                            <select class="destinazione-prima" onchange="updateDestinationCard(${index})">
                                <option value="">Destinazione succo 1ª</option>
@@ -1506,20 +1423,19 @@ $(document).ready(function() {
                                <option value="CONCENTRATO">CONCENTRATO</option>
                                <option value="ALTRO">ALTRO</option>
                            </select>
-                           <input type="text" class="altra-destinazione hidden-field" placeholder="Specifica altra destinazione" style="margin-top: 3px;">
                        </div>
                    </div>
                    
                    <div class="remaining-qty">Rimanente: <span class="remaining-value">0</span> kg</div>
                    
-                   <!-- Sezione trasferimento -->
+                   <!-- Sezione trasferimento compatta -->
                    <div class="transfer-section">
                        <div class="transfer-row">
-                           <span class="form-label">Invia a:</span>
+                           <span class="form-label">Invia:</span>
                            <select class="transfer-destination"></select>
                            <input type="number" class="transfer-qty" placeholder="kg" min="0" step="0.1">
                            <button type="button" class="btn btn-success" onclick="executeTransfer(${index})">
-                               Trasferisci
+                               →
                            </button>
                        </div>
                    </div>
@@ -1529,14 +1445,13 @@ $(document).ready(function() {
                    <div class="form-row">
                        <span class="form-label">Polpa:</span>
                        <div class="form-input">
-                           <select class="tenore-polpa-prima" onchange="toggleAltroTenore(${index}, 'prima')">
+                           <select class="tenore-polpa-prima">
                                <option value="STANDARD">STANDARD</option>
                                <option value="LIMPIDO">LIMPIDO</option>
                                <option value="<1%"><1%</option>
                                <option value="2%">2%</option>
                                <option value="3%">3%</option>
                                <option value="6%">6%</option>
-                               <option value="ALTRO">ALTRO</option>
                            </select>
                        </div>
                    </div>
@@ -1544,7 +1459,7 @@ $(document).ready(function() {
                    <div class="form-row">
                        <span class="form-label">°BX:</span>
                        <div class="form-input">
-                           <select class="brix-prima" onchange="toggleAltroBrix(${index}, 'prima'); updateSupplierConcentrato(${index});">
+                           <select class="brix-prima" onchange="updateSupplierConcentrato(${index});">
                                <option value="NAT">NAT</option>
                                <option value="20">20</option>
                                <option value="32">32</option>
@@ -1555,16 +1470,15 @@ $(document).ready(function() {
                                <option value="55">55</option>
                                <option value="60">60</option>
                                <option value="65">65</option>
-                               <option value="ALTRO">ALTRO</option>
                            </select>
                        </div>
                    </div>
 
                    <!-- Campo Q. Concentrato del fornitore -->
                    <div class="form-row concentrato-prima-row hidden-field">
-                       <span class="form-label">Q. Concentrato:</span>
+                       <span class="form-label">Q. Conc.:</span>
                        <div class="form-input">
-                           <input type="text" class="quantita-concentrato-prima concentrato-field" readonly>
+                           <input type="text" class="quantita-concentrato-prima concentrato-field" readonly style="font-size: 8px;">
                        </div>
                    </div>
 
@@ -1580,7 +1494,7 @@ $(document).ready(function() {
                    </div>
 
                    <div class="form-row">
-                       <span class="form-label">Pastorizzato:</span>
+                       <span class="form-label">Past.:</span>
                        <div class="form-input">
                            <select class="pastorizzato-prima">
                                <option value="SI">SI</option>
@@ -1590,7 +1504,7 @@ $(document).ready(function() {
                    </div>
 
                    <div class="form-row">
-                       <span class="form-label">Conservato:</span>
+                       <span class="form-label">Cons.:</span>
                        <div class="form-input">
                            <select class="conservato-prima">
                                <option value="SI">SI</option>
@@ -1602,17 +1516,17 @@ $(document).ready(function() {
                    <div class="form-row">
                        <span class="form-label">Note:</span>
                        <div class="form-input">
-                           <textarea class="note-prima" placeholder="Note Succo 1ª" rows="2"></textarea>
+                           <textarea class="note-prima" placeholder="Note" rows="2" style="font-size: 8px;"></textarea>
                        </div>
                    </div>
                </div>
 
                <!-- Pulsanti compatti -->
-               <div style="margin-top: 8px; text-align: center;">
-                   <button type="button" class="btn btn-warning" onclick="resetSupplier(${index})" style="padding: 3px 8px; font-size: 10px; margin: 2px;">
+               <div style="margin-top: 6px; text-align: center;">
+                   <button type="button" class="btn btn-warning" onclick="resetSupplier(${index})" style="padding: 2px 6px; font-size: 8px; margin: 1px;">
                        Reset
                    </button>
-                   <button type="button" class="btn btn-danger" onclick="removeSupplier(${index})" style="padding: 3px 8px; font-size: 10px; margin: 2px;">
+                   <button type="button" class="btn btn-danger" onclick="removeSupplier(${index})" style="padding: 2px 6px; font-size: 8px; margin: 1px;">
                        Rimuovi
                    </button>
                </div>
@@ -1620,15 +1534,15 @@ $(document).ready(function() {
        `);
    }
 
-   // Crea card per altra destinazione - MODIFICATA con logica griglia
+   // Crea card per altra destinazione
    function createAltraDestinazioneCard(index) {
        return $(`
-           <div class="altro-dest-card" data-altro-dest-index="${index}">
+           <div class="altro-dest-card" data-altro-dest-index="${index}" data-grid-position="">
                <div class="altro-dest-header">Altra Destinazione ${index}</div>
                
                <!-- Provenienza -->
                <div class="provenienza-info" id="provenienza-${index}">
-                   Nessuna provenienza specificata
+                   Nessuna provenienza
                </div>
                
                <!-- Quantità Succo 1ª -->
@@ -1643,7 +1557,7 @@ $(document).ready(function() {
 
                <!-- Destinazione Succo 1ª -->
                <div class="form-row">
-                   <span class="form-label dest-label destinazione-label-altra">Dest. Succo 1ª:</span>
+                   <span class="form-label dest-label destinazione-label-altra">Dest.:</span>
                    <div class="form-input">
                        <select class="destinazione-prima-altra" onchange="updateAltraDestinazioneBioStyles(${index})">
                            <option value="">Destinazione succo 1ª</option>
@@ -1669,13 +1583,12 @@ $(document).ready(function() {
                            <option value="CONCENTRATO">CONCENTRATO</option>
                            <option value="ALTRO">ALTRO</option>
                        </select>
-                       <input type="text" class="altra-destinazione-text hidden-field" placeholder="Specifica altra destinazione" style="margin-top: 3px;">
                    </div>
                </div>
 
                <div class="section-divider"></div>
 
-               <!-- Caratteristiche prodotti -->
+               <!-- Caratteristiche prodotti compatte -->
                <div class="form-row">
                    <span class="form-label">Polpa:</span>
                    <div class="form-input">
@@ -1686,9 +1599,7 @@ $(document).ready(function() {
                            <option value="2%">2%</option>
                            <option value="3%">3%</option>
                            <option value="6%">6%</option>
-                           <option value="ALTRO">ALTRO</option>
                        </select>
-                       <input type="text" class="altro-tenore-text hidden-field" placeholder="Specifica altro tenore" style="margin-top: 3px;">
                    </div>
                </div>
 
@@ -1706,9 +1617,7 @@ $(document).ready(function() {
                            <option value="55">55</option>
                            <option value="60">60</option>
                            <option value="65">65</option>
-                           <option value="ALTRO">ALTRO</option>
                        </select>
-                       <input type="text" class="altro-brix-text hidden-field" placeholder="Specifica altro Brix" style="margin-top: 3px;">
                    </div>
                </div>
 
@@ -1724,7 +1633,7 @@ $(document).ready(function() {
                </div>
 
                <div class="form-row">
-                   <span class="form-label">Pastorizzato:</span>
+                   <span class="form-label">Past.:</span>
                    <div class="form-input">
                        <select class="pastorizzato-altra">
                            <option value="SI">SI</option>
@@ -1734,7 +1643,7 @@ $(document).ready(function() {
                </div>
 
                <div class="form-row">
-                   <span class="form-label">Conservato:</span>
+                   <span class="form-label">Cons.:</span>
                    <div class="form-input">
                        <select class="conservato-altra">
                            <option value="SI">SI</option>
@@ -1746,16 +1655,16 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Note:</span>
                    <div class="form-input">
-                       <textarea class="note-altra" placeholder="Note Altra Destinazione" rows="2"></textarea>
+                       <textarea class="note-altra" placeholder="Note" rows="2" style="font-size: 8px;"></textarea>
                    </div>
                </div>
 
-               <!-- Pulsanti compatti con reset aggiunto -->
-               <div style="margin-top: 8px; text-align: center;">
-                   <button type="button" class="btn btn-warning" onclick="resetAltraDestinazione(${index})" style="padding: 3px 8px; font-size: 10px; margin: 2px;">
+               <!-- Pulsanti compatti -->
+               <div style="margin-top: 6px; text-align: center;">
+                   <button type="button" class="btn btn-warning" onclick="resetAltraDestinazione(${index})" style="padding: 2px 6px; font-size: 8px; margin: 1px;">
                        Reset
                    </button>
-                   <button type="button" class="btn btn-danger" onclick="removeAltraDestinazione(${index})" style="padding: 3px 8px; font-size: 10px; margin: 2px;">
+                   <button type="button" class="btn btn-danger" onclick="removeAltraDestinazione(${index})" style="padding: 2px 6px; font-size: 8px; margin: 1px;">
                        Rimuovi
                    </button>
                </div>
@@ -1763,37 +1672,7 @@ $(document).ready(function() {
        `);
    }
 
-   // NUOVA: Riorganizza la griglia dopo modifiche
-   function reorganizeGrid() {
-       // Recupera tutti gli elementi e le loro posizioni
-       const suppliers = $('.supplier-card').toArray();
-       const destinations = $('.altro-dest-card').toArray();
-       
-       // Reset delle posizioni
-       gridPositions = { suppliers: [], destinations: [] };
-       
-       // Riposiziona fornitori
-       suppliers.forEach((supplier, index) => {
-           const $supplier = $(supplier);
-           const position = calculateGridPosition('supplier');
-           if (position) {
-               placeInGrid($supplier, position);
-           }
-       });
-       
-       // Riposiziona destinazioni
-       destinations.forEach((destination, index) => {
-           const $destination = $(destination);
-           const position = calculateGridPosition('destination');
-           if (position) {
-               placeInGrid($destination, position);
-           }
-       });
-   }
-
-   // [Continuo con le altre funzioni...]
-
-   // MODIFICATA: Funzione per aggiornare i colori bio per altra destinazione
+   // Funzione per aggiornare i colori bio per altra destinazione
    window.updateAltraDestinazioneBioStyles = function(index) {
        const card = $(`.altro-dest-card[data-altro-dest-index="${index}"]`);
        const bioStatus = card.find('.bio-altra').val();
@@ -1814,7 +1693,7 @@ $(document).ready(function() {
        }
    };
 
-   // NUOVA: Funzione reset per altra destinazione
+   // Funzione reset per altra destinazione
    window.resetAltraDestinazione = function(index) {
        if (confirm('Sei sicuro di voler resettare tutti i campi di questa colonna?')) {
            const card = $(`.altro-dest-card[data-altro-dest-index="${index}"]`);
@@ -1822,11 +1701,8 @@ $(document).ready(function() {
            // Reset tutti i campi
            card.find('.quantita-prima-altra').val('');
            card.find('.destinazione-prima-altra').val('');
-           card.find('.altra-destinazione-text').val('').addClass('hidden-field');
            card.find('.tenore-polpa-altra').val('STANDARD');
-           card.find('.altro-tenore-text').val('').addClass('hidden-field');
            card.find('.brix-altra').val('NAT');
-           card.find('.altro-brix-text').val('').addClass('hidden-field');
            card.find('.bio-altra').val('SI');
            card.find('.pastorizzato-altra').val('SI');
            card.find('.conservato-altra').val('NO');
@@ -1834,7 +1710,7 @@ $(document).ready(function() {
            
            // Reset provenienza
            delete provenienzaData[index];
-           $(`#provenienza-${index}`).text('Nessuna provenienza specificata');
+           $(`#provenienza-${index}`).text('Nessuna provenienza');
            
            updateAltraDestinazioneBioStyles(index);
            
@@ -1852,8 +1728,6 @@ $(document).ready(function() {
            card.find('.resa-prima').val(yield.toFixed(2));
        }
    };
-
-   // [Continuo con tutte le altre funzioni identiche al codice precedente...]
 
    // Funzioni di gestione
    window.updateSupplierName = function(index) {
@@ -1919,14 +1793,6 @@ $(document).ready(function() {
            card.find('.transfer-qty').val('');
        }
        
-       // Gestisci campo altro destinazione
-       const altroField = card.find('.altra-destinazione');
-       if (card.find('.destinazione-prima').val() === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-       
        updateTransferOptions(index);
    };
 
@@ -1970,48 +1836,12 @@ $(document).ready(function() {
            }
            
            card.find('.orario-fine-display').html(orarioFineDisplay);
-           
-           // Aggiorna orario successivo con stessa linea
-           updateNextSupplierTime(index, `${oreFine}:${minutiFineStr}`);
        } else {
            card.find('.orario-fine-display').html('');
        }
    };
 
-   // Nuova funzione per aggiornare l'orario del fornitore successivo
-   function updateNextSupplierTime(currentIndex, endTime) {
-       const currentCard = $(`.supplier-card[data-supplier-index="${currentIndex}"]`);
-       const currentLinea = currentCard.find('.linea-trasformazione').val();
-       
-       if (!currentLinea) return;
-       
-       // Trova il fornitore successivo con la stessa linea
-       let nextSupplier = null;
-       let nextIndex = currentIndex + 1;
-       
-       $('.supplier-card').each(function() {
-           const index = $(this).data('supplier-index');
-           const linea = $(this).find('.linea-trasformazione').val();
-           
-           if (index > currentIndex && linea === currentLinea) {
-               if (!nextSupplier || index < nextSupplier.data('supplier-index')) {
-                   nextSupplier = $(this);
-               }
-           }
-       });
-       
-       // Se trova un fornitore successivo con stessa linea, aggiorna il suo orario di inizio
-       if (nextSupplier) {
-           const orarioInizioField = nextSupplier.find('.orario-inizio');
-           // Aggiorna solo se il campo è vuoto o se non è stato modificato manualmente di recente
-           if (!orarioInizioField.val() || !orarioInizioField.data('manually-changed')) {
-               orarioInizioField.val(endTime);
-               calculateEndTime(nextSupplier.data('supplier-index'));
-           }
-       }
-   }
-
-   // Gestione colori bio con nuovi colori combinazioni
+   // Gestione colori bio
    window.updateBioStyles = function(index) {
        const card = $(`.supplier-card[data-supplier-index="${index}"]`);
        const certificazione = card.find('.certificazione-prodotto').val();
@@ -2048,14 +1878,6 @@ $(document).ready(function() {
            }
        }
        
-       // Gestisci campo altro certificazione
-       const altroField = card.find('.altra-certificazione');
-       if (certificazione === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-       
        updateCombinazioneOptions();
    };
 
@@ -2071,36 +1893,12 @@ $(document).ready(function() {
        }
    };
 
-   window.toggleAltroTenore = function(index, type) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const tenore = card.find(`.tenore-polpa-${type}`).val();
-       const altroField = card.find(`.altro-tenore-${type}`);
-       
-       if (tenore === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-   };
-
-   window.toggleAltroBrix = function(index, type) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const brix = card.find(`.brix-${type}`).val();
-       const altroField = card.find(`.altro-brix-${type}`);
-       
-       if (brix === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-   };
-
    // Funzione per aggiornare le opzioni di trasferimento
    function updateTransferOptions(index) {
        const card = $(`.supplier-card[data-supplier-index="${index}"]`);
        const transferSelect = card.find('.transfer-destination');
        
-       transferSelect.empty().append('<option value="">Seleziona destinazione</option>');
+       transferSelect.empty().append('<option value="">Dest.</option>');
        
        // Aggiungi fornitori
        $('.supplier-card').each(function() {
@@ -2117,7 +1915,7 @@ $(document).ready(function() {
                }
                
                if (displayName) {
-                   transferSelect.append(`<option value="supplier_${otherIndex}">F${otherIndex} - ${displayName}</option>`);
+                   transferSelect.append(`<option value="supplier_${otherIndex}">F${otherIndex}</option>`);
                }
            }
        });
@@ -2125,7 +1923,7 @@ $(document).ready(function() {
        // Aggiungi altre destinazioni
        $('.altro-dest-card').each(function() {
            const altroIndex = $(this).data('altro-dest-index');
-           transferSelect.append(`<option value="altra_dest_${altroIndex}">Altra Destinazione ${altroIndex}</option>`);
+           transferSelect.append(`<option value="altra_dest_${altroIndex}">D${altroIndex}</option>`);
        });
    }
 
@@ -2173,7 +1971,7 @@ $(document).ready(function() {
            
            const targetName = getSupplierDisplayName(targetCard);
            
-           if (!confirm(`Confermi il trasferimento di ${transferAmount} kg di succo 1ª da F${sourceIndex} (${sourceName}) a F${targetIndex} (${targetName})?`)) {
+           if (!confirm(`Confermi il trasferimento di ${transferAmount} kg da F${sourceIndex} a F${targetIndex}?`)) {
                return;
            }
            
@@ -2199,10 +1997,10 @@ $(document).ready(function() {
            updateDestinationCard(targetIndex);
            updateSupplierConcentrato(targetIndex);
            
-           alert(`Trasferimento completato!\n${transferAmount} kg trasferiti da F${sourceIndex} (${sourceName}) a F${targetIndex} (${targetName})\nNuova quantità F${targetIndex}: ${newTargetQty.toFixed(1)} kg`);
+           alert(`Trasferimento completato! ${transferAmount} kg trasferiti da F${sourceIndex} a F${targetIndex}`);
            
        } else if (targetValue.startsWith('altra_dest_')) {
-           // Trasferimento verso altra destinazione con tracciamento provenienza
+           // Trasferimento verso altra destinazione
            const targetIndex = targetValue.replace('altra_dest_', '');
            const targetCard = $(`.altro-dest-card[data-altro-dest-index="${targetIndex}"]`);
            
@@ -2211,7 +2009,7 @@ $(document).ready(function() {
                return;
            }
            
-           if (!confirm(`Confermi il trasferimento di ${transferAmount} kg di succo 1ª da F${sourceIndex} (${sourceName}) ad Altra Destinazione ${targetIndex}?`)) {
+           if (!confirm(`Confermi il trasferimento di ${transferAmount} kg da F${sourceIndex} a D${targetIndex}?`)) {
                return;
            }
            
@@ -2220,7 +2018,7 @@ $(document).ready(function() {
            const newTargetQty = currentTargetQty + transferAmount;
            targetCard.find('.quantita-prima-altra').val(newTargetQty.toFixed(1));
            
-           // Copia i dati bio dal fornitore sorgente per mantenere la logica del colore rosso
+           // Copia i dati bio dal fornitore sorgente
            const sourceBio = sourceCard.find('.bio-prima').val();
            targetCard.find('.bio-altra').val(sourceBio);
            
@@ -2229,19 +2027,19 @@ $(document).ready(function() {
                provenienzaData[targetIndex] = [];
            }
            provenienzaData[targetIndex].push({
-               fornitore: `F${sourceIndex} - ${sourceName}`,
+               fornitore: `F${sourceIndex}-${sourceName}`,
                quantita: transferAmount
            });
            
            // Aggiorna visualizzazione provenienza
            const provenienzaText = provenienzaData[targetIndex]
-               .map(p => `${p.fornitore}: ${p.quantita}kg`)
+               .map(p => `${p.fornitore}:${p.quantita}kg`)
                .join(', ');
-           $(`#provenienza-${targetIndex}`).text(`Provenienza: ${provenienzaText}`);
+           $(`#provenienza-${targetIndex}`).text(`Da: ${provenienzaText}`);
            
            updateAltraDestinazioneBioStyles(targetIndex);
            
-           alert(`Trasferimento completato!\n${transferAmount} kg trasferiti da F${sourceIndex} (${sourceName}) ad Altra Destinazione ${targetIndex}\nNuova quantità Altra Destinazione ${targetIndex}: ${newTargetQty.toFixed(1)} kg`);
+           alert(`Trasferimento completato! ${transferAmount} kg trasferiti da F${sourceIndex} a D${targetIndex}`);
        }
        
        // Traccia la quantità trasferita dal fornitore sorgente
@@ -2258,7 +2056,6 @@ $(document).ready(function() {
        updateDestinationCard(sourceIndex);
    };
 
-   // Gestisce anche quando è selezionato "ALTRO"
    function getSupplierDisplayName(card) {
        const nome = card.find('.nome-fornitore').val();
        const altroNome = card.find('.altro-fornitore').val();
@@ -2276,7 +2073,7 @@ $(document).ready(function() {
        detailsContainer.removeClass('hidden-field');
        
        let currentDetails = detailsContainer.html();
-       const newDetail = `<div><strong>+${amount} kg</strong> da F${sourceIndex} (${sourceName})</div>`;
+       const newDetail = `<div>+${amount}kg da F${sourceIndex}</div>`;
        
        if (currentDetails) {
            detailsContainer.html(currentDetails + newDetail);
@@ -2285,7 +2082,7 @@ $(document).ready(function() {
        }
    }
 
-   // Reset fornitore con ripristino colore grigio
+   // Reset fornitore
    window.resetSupplier = function(index) {
        if (confirm('Sei sicuro di voler resettare tutti i campi di questo fornitore?')) {
            const card = $(`.supplier-card[data-supplier-index="${index}"]`);
@@ -2314,9 +2111,7 @@ $(document).ready(function() {
            card.find('.quantita-trasformata').val('');
            card.find('.giacenza-fornitore').val('');
            card.find('.certificazione-prodotto').val('');
-           card.find('.altra-certificazione').val('').addClass('hidden-field');
            card.find('.varieta-prodotto').val('');
-           card.find('.altra-varieta').val('').addClass('hidden-field');
            card.find('.linea-trasformazione').val('');
            card.find('.portata-impianto').val('');
            card.find('.orario-inizio').val('');
@@ -2330,7 +2125,6 @@ $(document).ready(function() {
            
            // Reset destinazioni
            card.find('.destinazione-prima').val('');
-           card.find('.altra-destinazione').val('').addClass('hidden-field');
            
            // Reset caratteristiche
            card.find('.tenore-polpa-prima').val('STANDARD');
@@ -2366,6 +2160,9 @@ $(document).ready(function() {
 
    window.removeSupplier = function(index) {
        if (confirm('Sei sicuro di voler rimuovere questo fornitore?')) {
+           const card = $(`.supplier-card[data-supplier-index="${index}"]`);
+           const position = card.data('grid-position');
+           
            // Rimuovi riferimenti dalle combinazioni
            ['verde', 'azzurro', 'viola'].forEach(color => {
                const supplierIndex = combinationData[color].indexes.indexOf(index);
@@ -2375,13 +2172,8 @@ $(document).ready(function() {
                }
            });
            
-           // Rimuovi dalla griglia
-           const position = gridPositions.suppliers.indexOf(index);
-           if (position > -1) {
-               gridPositions.suppliers.splice(position, 1);
-           }
-           
-           $(`.supplier-card[data-supplier-index="${index}"]`).remove();
+           // Libera la posizione nella griglia
+           freeGridPosition(position);
            
            // Rimuovi dati trasferimenti e quantità trasferite
            delete transferData[index];
@@ -2397,113 +2189,25 @@ $(document).ready(function() {
            toggleCombinazioniSection();
            updateSummarySection();
            updateAllTransferOptions();
-           updateSuppliersCount();
-           reorganizeGrid();
        }
    };
 
    // Gestione rimozione altra destinazione
    window.removeAltraDestinazione = function(index) {
-       if (confirm('Sei sicuro di voler rimuovere questa colonna?')) {
-           // Rimuovi dalla griglia
-           const position = gridPositions.destinations.indexOf(index);
-           if (position > -1) {
-               gridPositions.destinations.splice(position, 1);
-           }
+       if (confirm('Sei sicuro di voler rimuovere questa destinazione?')) {
+           const card = $(`.altro-dest-card[data-altro-dest-index="${index}"]`);
+           const position = card.data('grid-position');
            
-           $(`.altro-dest-card[data-altro-dest-index="${index}"]`).remove();
+           // Libera la posizione nella griglia
+           freeGridPosition(position);
            
            // Rimuovi dati provenienza
            delete provenienzaData[index];
            
-           // Rinumera le altre destinazioni rimaste
-           renumberAltraDestinazione();
-           
            // Aggiorna le opzioni di trasferimento
            updateAllTransferOptions();
-           reorganizeGrid();
        }
    };
-
-   // Funzione per rinumerare le altre destinazioni
-   function renumberAltraDestinazione() {
-       let newCount = 0;
-       const oldProvenienzaData = {...provenienzaData};
-       provenienzaData = {};
-       
-       $('.altro-dest-card').each(function() {
-           newCount++;
-           const oldIndex = $(this).data('altro-dest-index');
-           
-           // Aggiorna data attribute
-           $(this).attr('data-altro-dest-index', newCount);
-           $(this).data('altro-dest-index', newCount);
-           
-           // Aggiorna header
-           $(this).find('.altro-dest-header').text(`Altra Destinazione ${newCount}`);
-           
-           // Aggiorna ID provenienza
-           $(this).find('.provenienza-info').attr('id', `provenienza-${newCount}`);
-           
-           // Trasferisci dati provenienza
-           if (oldProvenienzaData[oldIndex]) {
-               provenienzaData[newCount] = oldProvenienzaData[oldIndex];
-               const provenienzaText = provenienzaData[newCount]
-                   .map(p => `${p.fornitore}: ${p.quantita}kg`)
-                   .join(', ');
-               $(`#provenienza-${newCount}`).text(`Provenienza: ${provenienzaText}`);
-           }
-           
-           // Aggiorna onclick dei pulsanti
-           $(this).find('.btn').each(function() {
-               const onclick = $(this).attr('onclick');
-               if (onclick) {
-                   const newOnclick = onclick.replace(/\d+/, newCount);
-                   $(this).attr('onclick', newOnclick);
-               }
-           });
-       });
-       
-       altraDestinazioneCount = newCount;
-   }
-
-   // Gestione campi "ALTRO" per altra destinazione
-   $(document).on('change', '.destinazione-prima-altra', function() {
-       const card = $(this).closest('.altro-dest-card');
-       const altroField = card.find('.altra-destinazione-text');
-       
-       if ($(this).val() === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-       
-       // Aggiorna colori bio
-       const index = card.data('altro-dest-index');
-       updateAltraDestinazioneBioStyles(index);
-   });
-
-   $(document).on('change', '.tenore-polpa-altra', function() {
-       const card = $(this).closest('.altro-dest-card');
-       const altroField = card.find('.altro-tenore-text');
-       
-       if ($(this).val() === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-   });
-
-   $(document).on('change', '.brix-altra', function() {
-       const card = $(this).closest('.altro-dest-card');
-       const altroField = card.find('.altro-brix-text');
-       
-       if ($(this).val() === 'ALTRO') {
-           altroField.removeClass('hidden-field');
-       } else {
-           altroField.addClass('hidden-field').val('');
-       }
-   });
 
    function updateTotals() {
        let totaleEntrata = 0;
@@ -2525,12 +2229,7 @@ $(document).ready(function() {
        $('#giacenza-totale-display').text(totaleGiacenza.toLocaleString());
    }
 
-   function updateSuppliersCount() {
-       const count = $('.supplier-card').length;
-       $('#suppliers-count').text(count);
-   }
-
-   // Aggiornamento opzioni combinazioni con colori
+   // Aggiornamento opzioni combinazioni
    function updateCombinazioneOptions() {
        const selectVerde = $('#combinazione-fornitori-verde');
        const selectAzzurro = $('#combinazione-fornitori-azzurro');
@@ -2553,20 +2252,14 @@ $(document).ready(function() {
                nomeFornitore = nome;
            }
            
-           const certificazione = $(this).find('.certificazione-prodotto').val() || 'N/D';
-           const linea = $(this).find('.linea-trasformazione').val() || 'N/D';
-           
            if (nomeFornitore) {
                fornitori.push({ 
                    index: index, 
-                   nome: nomeFornitore,
-                   certificazione: certificazione,
-                   linea: linea
+                   nome: nomeFornitore
                });
            }
        });
-       
-       // Combinazioni di 2 fornitori
+      // Combinazioni di 2 fornitori
        for (let i = 0; i < fornitori.length; i++) {
            for (let j = i + 1; j < fornitori.length; j++) {
                const combo = `${fornitori[i].index},${fornitori[j].index}`;
@@ -2601,7 +2294,7 @@ $(document).ready(function() {
        }
    }
 
-   // Sezione riepilogo con giallo uguale alle altre caselle e calcolo concentrato
+   // Sezione riepilogo
    function updateSummarySection() {
        let totalSeconda = 0;
        let totalTorchiato = 0;
@@ -2665,20 +2358,6 @@ $(document).ready(function() {
                                <option value="65">65</option>
                            </select>
                        </div>
-                       <div class="summary-item">
-                           <span>Pastorizzato:</span>
-                           <select class="summary-input" id="pastorizzato-seconda-totale">
-                               <option value="SI" selected>SI</option>
-                               <option value="NO">NO</option>
-                           </select>
-                       </div>
-                       <div class="summary-item">
-                           <span>Conservato:</span>
-                           <select class="summary-input" id="conservato-seconda-totale">
-                               <option value="SI" selected>SI</option>
-                               <option value="NO">NO</option>
-                           </select>
-                       </div>
                        <div class="summary-notes">
                            <strong>Note:</strong>
                            <textarea class="summary-textarea" id="note-seconda-totale" placeholder="Note Succo 2ª"></textarea>
@@ -2729,20 +2408,6 @@ $(document).ready(function() {
                                <option value="65">65</option>
                            </select>
                        </div>
-                       <div class="summary-item">
-                           <span>Pastorizzato:</span>
-                           <select class="summary-input" id="pastorizzato-torchiato-totale">
-                               <option value="SI" selected>SI</option>
-                               <option value="NO">NO</option>
-                           </select>
-                       </div>
-                       <div class="summary-item">
-                           <span>Conservato:</span>
-                           <select class="summary-input" id="conservato-torchiato-totale">
-                               <option value="SI">SI</option>
-                               <option value="NO" selected>NO</option>
-                           </select>
-                       </div>
                        <div class="summary-notes">
                            <strong>Note:</strong>
                            <textarea class="summary-textarea" id="note-torchiato-totale" placeholder="Note Torchiato"></textarea>
@@ -2769,14 +2434,14 @@ $(document).ready(function() {
        $('#quantita-concentrato').val(concentrato + ' kg');
    };
 
-   // Gestione combinazioni con colori
+   // Gestione combinazioni
    function getLastSupplierInCombination(comboValue) {
        const indexes = comboValue.split(',').map(i => parseInt(i));
        const maxIndex = Math.max(...indexes);
        return $(`.supplier-card[data-supplier-index="${maxIndex}"]`);
    }
 
-   // Applica combinazione con nuovo sistema di visualizzazione
+   // Applica combinazione
    function applyCombination(color) {
        const selectedCombo = $(`#combinazione-fornitori-${color}`).val();
        if (!selectedCombo) {
@@ -2802,9 +2467,6 @@ $(document).ready(function() {
                nomeFornitore = nome;
            }
            
-           const certificazione = card.find('.certificazione-prodotto').val() || 'N/D';
-           const linea = card.find('.linea-trasformazione').val() || 'N/D';
-           
            const quantitaTrasformata = parseFloat(card.find('.quantita-trasformata').val()) || 0;
            const resaPrima = parseFloat(card.find('.resa-prima').val()) || 0;
            
@@ -2813,8 +2475,6 @@ $(document).ready(function() {
                
                combinationDetails.push({
                    nome: nomeFornitore,
-                   certificazione: certificazione,
-                   linea: linea,
                    quantita: quantitaTrasformata,
                    resa: resaPrima,
                    risultato: risultatoFornitore.toFixed(1),
@@ -2842,16 +2502,16 @@ $(document).ready(function() {
            quantitaPrimaField.addClass('combination-result');
            quantitaPrimaField.attr('data-combination-type', color);
            
-           // Crea i dettagli della combinazione da mostrare sotto il campo
+           // Crea i dettagli della combinazione
            const combinationText = combinationDetails.map(detail => 
-               `F${detail.supplierIndex}= ${detail.risultato}kg`
+               `F${detail.supplierIndex}=${detail.risultato}kg`
            ).join(' + ');
-           const totalText = `Totale ${totalCombination.toFixed(1)}kg`;
+           const totalText = `Tot.${totalCombination.toFixed(1)}kg`;
            
            // Mostra i dettagli sotto il campo succo 1ª
            const combinationDetailsContainer = lastSupplierInCombo.find('.combination-details');
            combinationDetailsContainer.removeClass('hidden-field');
-           combinationDetailsContainer.html(`<strong>Combinazione ${color.charAt(0).toUpperCase() + color.slice(1)}:</strong><br/>${combinationText}<br/><strong>${totalText}</strong>`);
+           combinationDetailsContainer.html(`<strong>Comb.${color.charAt(0).toUpperCase()}:</strong><br/>${combinationText}<br/><strong>${totalText}</strong>`);
            
            // Applica colori a tutti i fornitori della combinazione
            indexes.forEach(index => {
@@ -2877,7 +2537,7 @@ $(document).ready(function() {
            updateSupplierConcentrato(lastSupplierInCombo.data('supplier-index'));
            
            const colorText = color.charAt(0).toUpperCase() + color.slice(1);
-           alert(`Combinazione ${colorText} applicata!\n\nDettaglio:\n${combinationDetails.map(d => `F${d.supplierIndex} - ${d.nome}: ${d.quantita}kg × ${d.resa}% = ${d.risultato}kg`).join('\n')}\n\nTotale combinazione: ${totalCombination.toFixed(1)} kg\nQuantità F${lastSupplierIndex}: ${lastSupplierQty.toFixed(1)} kg`);
+           alert(`Combinazione ${colorText} applicata! Totale: ${totalCombination.toFixed(1)} kg`);
        }
    }
 
@@ -2919,7 +2579,7 @@ $(document).ready(function() {
        combinationData[color] = { indexes: [], details: [] };
        
        const colorText = color.charAt(0).toUpperCase() + color.slice(1);
-       alert(`Combinazione ${colorText} rimossa. I valori sono stati ricalcolati.`);
+       alert(`Combinazione ${colorText} rimossa.`);
    }
 
    function updateVarietyOptions(agrume) {
@@ -2942,9 +2602,9 @@ $(document).ready(function() {
        });
    }
 
-   // Funzioni di salvataggio e caricamento complete ma abbreviate per spazio
+   // Funzioni di salvataggio e caricamento
    function collectProgramData() {
-       return {
+       const data = {
            tipoAgrume: $('#tipo-agrume-giornaliero').val(),
            dataLavorazione: $('#data-lavorazione').val(),
            ultimaRevisione: $('#last-revision').text(),
@@ -2952,16 +2612,116 @@ $(document).ready(function() {
            transferredAmounts: transferredAmounts,
            provenienzaData: provenienzaData,
            combinationData: combinationData,
-           gridPositions: gridPositions,
-           fornitori: [], // raccolti dinamicamente
-           altreDestinazioni: [] // raccolti dinamicamente
+           elementsCount: elementsCount,
+           fornitori: [],
+           altreDestinazioni: [],
+           totaliSeconda: {
+               destinazione: $('#destinazione-seconda-totale').val() || '',
+               polpa: $('#polpa-seconda-totale').val() || '<1%',
+               brix: $('#brix-seconda-totale').val() || 'NAT',
+               note: $('#note-seconda-totale').val() || ''
+           },
+           totaliTorchiato: {
+               destinazione: $('#destinazione-torchiato-totale').val() || 'CONCENTRATO',
+               polpa: $('#polpa-torchiato-totale').val() || '<1%',
+               brix: $('#brix-torchiato-totale').val() || '45',
+               note: $('#note-torchiato-totale').val() || '',
+               quantitaConcentrato: $('#quantita-concentrato').val() || ''
+           }
        };
+       
+       // Raccolta dati fornitori
+       $('.supplier-card').each(function() {
+           const index = $(this).data('supplier-index');
+           const position = $(this).data('grid-position');
+           
+           const receivedTransfers = transferData[index] || [];
+           
+           // Determina colore combinazione
+           let combinationColor = '';
+           ['verde', 'azzurro', 'viola'].forEach(color => {
+               if ($(this).hasClass(`combination-${color}`)) {
+                   combinationColor = color;
+               }
+           });
+           
+           const fornitore = {
+               supplierIndex: index,
+               gridPosition: position,
+               nome: $(this).find('.nome-fornitore').val(),
+               altroNome: $(this).find('.altro-fornitore').val(),
+               quantitaEntrata: parseFloat($(this).find('.quantita-fornitore').val()) || 0,
+               quantitaTrasformata: parseFloat($(this).find('.quantita-trasformata').val()) || 0,
+               giacenza: parseFloat($(this).find('.giacenza-fornitore').val()) || 0,
+               certificazione: $(this).find('.certificazione-prodotto').val(),
+               varieta: $(this).find('.varieta-prodotto').val(),
+               lineaTrasformazione: $(this).find('.linea-trasformazione').val(),
+               portataImpianto: parseFloat($(this).find('.portata-impianto').val()) || 0,
+               orarioInizio: $(this).find('.orario-inizio').val(),
+               orarioFineDisplay: $(this).find('.orario-fine-display').html(),
+               rese: {
+                   prima: parseFloat($(this).find('.resa-prima').val()) || 0
+               },
+               quantitaProdotti: {
+                   prima: parseFloat($(this).find('.quantita-prima').val()) || 0
+               },
+               hasCombination: $(this).find('.quantita-prima').hasClass('combination-result'),
+               combinationType: $(this).find('.quantita-prima').attr('data-combination-type') || '',
+               combinationColor: combinationColor,
+               combinationDetails: $(this).find('.combination-details').html() || '',
+               hasReceivedTransfers: $(this).find('.quantita-prima').hasClass('received-transfer'),
+               receivedTransfers: receivedTransfers,
+               caratteristicheProdotti: {
+                   prima: {
+                       tenorePolpa: $(this).find('.tenore-polpa-prima').val(),
+                       brix: $(this).find('.brix-prima').val(),
+                       bio: $(this).find('.bio-prima').val(),
+                       pastorizzato: $(this).find('.pastorizzato-prima').val(),
+                       conservato: $(this).find('.conservato-prima').val(),
+                       note: $(this).find('.note-prima').val(),
+                       quantitaConcentrato: $(this).find('.quantita-concentrato-prima').val()
+                   }
+               },
+               destinazioni: {
+                   prima: $(this).find('.destinazione-prima').val() || ''
+               }
+           };
+           
+           data.fornitori.push(fornitore);
+       });
+       
+       // Raccolta dati altre destinazioni
+       $('.altro-dest-card').each(function() {
+           const index = $(this).data('altro-dest-index');
+           const position = $(this).data('grid-position');
+           
+           const altraDestinazione = {
+               index: index,
+               gridPosition: position,
+               quantitaPrima: parseFloat($(this).find('.quantita-prima-altra').val()) || 0,
+               destinazione: $(this).find('.destinazione-prima-altra').val(),
+               caratteristiche: {
+                   tenorePolpa: $(this).find('.tenore-polpa-altra').val(),
+                   brix: $(this).find('.brix-altra').val(),
+                   bio: $(this).find('.bio-altra').val(),
+                   pastorizzato: $(this).find('.pastorizzato-altra').val(),
+                   conservato: $(this).find('.conservato-altra').val(),
+                   note: $(this).find('.note-altra').val()
+               }
+           };
+           
+           data.altreDestinazioni.push(altraDestinazione);
+       });
+       
+       return data;
    }
 
+   // Salvataggio su file
    function saveToFile() {
        try {
            const data = collectProgramData();
            const dataString = JSON.stringify(data, null, 2);
+           
            const today = new Date();
            const dateString = today.toISOString().split('T')[0];
            const agrume = data.tipoAgrume || 'programma';
@@ -2972,6 +2732,7 @@ $(document).ready(function() {
            } else {
                saveWithDownloadFallback(dataString, filename);
            }
+           
        } catch (error) {
            showSaveStatus('Errore durante la preparazione del file: ' + error.message, 'error');
        }
@@ -2981,11 +2742,16 @@ $(document).ready(function() {
        try {
            const fileHandle = await window.showSaveFilePicker({
                suggestedName: filename,
-               types: [{ description: 'File JSON', accept: { 'application/json': ['.json'] } }]
+               types: [{
+                   description: 'File JSON',
+                   accept: { 'application/json': ['.json'] }
+               }]
            });
+           
            const writable = await fileHandle.createWritable();
            await writable.write(dataString);
            await writable.close();
+           
            showSaveStatus(`File ${filename} salvato con successo!`, 'success');
        } catch (error) {
            if (error.name !== 'AbortError') {
@@ -3005,6 +2771,7 @@ $(document).ready(function() {
        a.click();
        document.body.removeChild(a);
        URL.revokeObjectURL(url);
+       
        showSaveStatus(`File ${filename} salvato nella cartella Download!`, 'success');
    }
 
@@ -3032,64 +2799,182 @@ $(document).ready(function() {
            }
        };
        reader.readAsText(file);
+       
        $(this).val('');
    });
 
    function loadDataFromObject(data) {
+       // Reset completo della griglia
+       $('.grid-item').removeClass('occupied').empty().each(function() {
+           const position = $(this).data('position');
+           $(this).append(`<div class="grid-placeholder">Posizione ${position}</div>`);
+       });
+       
        // Ripristina dati base
        $('#tipo-agrume-giornaliero').val(data.tipoAgrume || '');
        $('#data-lavorazione').val(data.dataLavorazione || '');
        $('#selected-agrume').text(data.tipoAgrume || 'N/D');
        
-       // Ripristina tutti i dati
        transferData = data.transferData || {};
        transferredAmounts = data.transferredAmounts || {};
        provenienzaData = data.provenienzaData || {};
        combinationData = data.combinationData || { verde: { indexes: [], details: [] }, azzurro: { indexes: [], details: [] }, viola: { indexes: [], details: [] } };
-       gridPositions = data.gridPositions || { suppliers: [], destinations: [] };
+       elementsCount = data.elementsCount || 0;
        
-       // Reset griglia
-       $('.supplier-card').remove();
-       $('.altro-dest-card').remove();
        supplierCount = 0;
        altraDestinazioneCount = 0;
        
-       // Carica fornitori e destinazioni con posizionamento griglia
+       // Ripristina fornitori
        if (data.fornitori && data.fornitori.length > 0) {
            data.fornitori.forEach(fornitore => {
                const index = fornitore.supplierIndex;
+               const position = fornitore.gridPosition;
+               
                if (index > supplierCount) supplierCount = index;
                
                const newCard = createSupplierCard(index);
-               const position = calculateGridPosition('supplier');
-               if (position) {
-                   placeInGrid(newCard, position);
-               }
+               newCard.data('grid-position', position);
+               
+               occupyGridPosition(position, newCard);
+               
+               const card = $(`.supplier-card[data-supplier-index="${index}"]`);
                
                // Ripristina tutti i dati del fornitore
-               // [codice di ripristino campi...]
+               card.find('.nome-fornitore').val(fornitore.nome || '');
+               card.find('.altro-fornitore').val(fornitore.altroNome || '');
+               card.find('.quantita-fornitore').val(fornitore.quantitaEntrata || '');
+               card.find('.quantita-trasformata').val(fornitore.quantitaTrasformata || '');
+               card.find('.giacenza-fornitore').val(fornitore.giacenza || '');
+               card.find('.certificazione-prodotto').val(fornitore.certificazione || '');
+               card.find('.varieta-prodotto').val(fornitore.varieta || '');
+               card.find('.linea-trasformazione').val(fornitore.lineaTrasformazione || '');
+               card.find('.portata-impianto').val(fornitore.portataImpianto || '');
+               card.find('.orario-inizio').val(fornitore.orarioInizio || '');
+               card.find('.orario-fine-display').html(fornitore.orarioFineDisplay || '');
+               
+               if (fornitore.rese) {
+                   card.find('.resa-prima').val(fornitore.rese.prima || '');
+               }
+               
+               if (fornitore.quantitaProdotti) {
+                   card.find('.quantita-prima').val(fornitore.quantitaProdotti.prima || '');
+               }
+               
+               // Ripristina caratteristiche
+               if (fornitore.caratteristicheProdotti?.prima) {
+                   const prima = fornitore.caratteristicheProdotti.prima;
+                   card.find('.tenore-polpa-prima').val(prima.tenorePolpa || 'STANDARD');
+                   card.find('.brix-prima').val(prima.brix || 'NAT');
+                   card.find('.bio-prima').val(prima.bio || 'SI');
+                   card.find('.pastorizzato-prima').val(prima.pastorizzato || 'SI');
+                   card.find('.conservato-prima').val(prima.conservato || 'NO');
+                   card.find('.note-prima').val(prima.note || '');
+                   card.find('.quantita-concentrato-prima').val(prima.quantitaConcentrato || '');
+               }
+               
+               // Ripristina destinazioni
+               card.find('.destinazione-prima').val(fornitore.destinazioni?.prima || '');
+               
+               // Gestisci campi altro
+               if (fornitore.nome === 'ALTRO') {
+                   card.find('.altro-fornitore').removeClass('hidden-field');
+               }
+               
+               // Ripristina combinazioni
+               if (fornitore.hasCombination) {
+                   card.find('.quantita-prima').addClass('combination-result');
+                   if (fornitore.combinationType) {
+                       card.find('.quantita-prima').attr('data-combination-type', fornitore.combinationType);
+                   }
+               }
+               
+               if (fornitore.combinationColor) {
+                   card.addClass(`combination-${fornitore.combinationColor}`);
+                   card.find('.supplier-header').addClass(`combination-${fornitore.combinationColor}`);
+               }
+               
+               if (fornitore.combinationDetails) {
+                   card.find('.combination-details').removeClass('hidden-field').html(fornitore.combinationDetails);
+               }
+               
+               // Ripristina trasferimenti
+               if (fornitore.hasReceivedTransfers) {
+                   card.find('.quantita-prima').addClass('received-transfer');
+               }
+               
+               updateSupplierName(index);
+               updateBioStyles(index);
+               updateSupplierConcentrato(index);
+               updateDestinationCard(index);
            });
        }
        
+       // Ripristina altre destinazioni
        if (data.altreDestinazioni && data.altreDestinazioni.length > 0) {
            data.altreDestinazioni.forEach(altra => {
                const index = altra.index;
+               const position = altra.gridPosition;
+               
                if (index > altraDestinazioneCount) altraDestinazioneCount = index;
                
                const newCard = createAltraDestinazioneCard(index);
-               const position = calculateGridPosition('destination');
-               if (position) {
-                   placeInGrid(newCard, position);
+               newCard.data('grid-position', position);
+               
+               occupyGridPosition(position, newCard);
+               
+               const card = $(`.altro-dest-card[data-altro-dest-index="${index}"]`);
+               
+               // Ripristina dati altra destinazione
+               card.find('.quantita-prima-altra').val(altra.quantitaPrima || '');
+               card.find('.destinazione-prima-altra').val(altra.destinazione || '');
+               
+               if (altra.caratteristiche) {
+                   const car = altra.caratteristiche;
+                   card.find('.tenore-polpa-altra').val(car.tenorePolpa || 'STANDARD');
+                   card.find('.brix-altra').val(car.brix || 'NAT');
+                   card.find('.bio-altra').val(car.bio || 'SI');
+                   card.find('.pastorizzato-altra').val(car.pastorizzato || 'SI');
+                   card.find('.conservato-altra').val(car.conservato || 'NO');
+                   card.find('.note-altra').val(car.note || '');
                }
                
-               // Ripristina tutti i dati dell'altra destinazione
-               // [codice di ripristino campi...]
+               // Ripristina provenienza
+               if (provenienzaData[index]) {
+                   const provenienzaText = provenienzaData[index]
+                       .map(p => `${p.fornitore}:${p.quantita}kg`)
+                       .join(', ');
+                   $(`#provenienza-${index}`).text(`Da: ${provenienzaText}`);
+               }
+               
+               updateAltraDestinazioneBioStyles(index);
            });
        }
        
+       // Ripristina totali
+       if (data.totaliSeconda) {
+           const sec = data.totaliSeconda;
+           setTimeout(() => {
+               $('#destinazione-seconda-totale').val(sec.destinazione || 'NAT IN TINI');
+               $('#polpa-seconda-totale').val(sec.polpa || '<1%');
+               $('#brix-seconda-totale').val(sec.brix || 'NAT');
+               $('#note-seconda-totale').val(sec.note || '');
+           }, 100);
+       }
+       
+       if (data.totaliTorchiato) {
+           const tor = data.totaliTorchiato;
+           setTimeout(() => {
+               $('#destinazione-torchiato-totale').val(tor.destinazione || 'CONCENTRATO');
+               $('#polpa-torchiato-totale').val(tor.polpa || '<1%');
+               $('#brix-torchiato-totale').val(tor.brix || '45');
+               $('#note-torchiato-totale').val(tor.note || '');
+               $('#quantita-concentrato').val(tor.quantitaConcentrato || '');
+           }, 100);
+       }
+       
        // Aggiorna tutto
+       updateElementsCount();
        updateTotals();
-       updateSuppliersCount();
        updateCombinazioneOptions();
        toggleCombinazioniSection();
        updateSummarySection();
@@ -3112,7 +2997,10 @@ $(document).ready(function() {
        }
        
        statusDiv.fadeIn();
-       setTimeout(() => statusDiv.fadeOut(), 3000);
+       
+       setTimeout(() => {
+           statusDiv.fadeOut();
+       }, 3000);
    }
 
    // Eventi principali
@@ -3140,53 +3028,88 @@ $(document).ready(function() {
            return;
        }
        
-       supplierCount++;
-       const newCard = createSupplierCard(supplierCount);
-       const position = calculateGridPosition('supplier');
-       
-       if (position) {
-           placeInGrid(newCard, position);
-           updateSuppliersCount();
-           updateCombinazioneOptions();
-           toggleCombinazioniSection();
-           updateAllTransferOptions();
-       } else {
-           alert('Griglia piena! Rimuovi prima un fornitore esistente.');
-           supplierCount--;
+       if (elementsCount >= maxElements) {
+           alert('Spazio esaurito! Massimo 8 elementi per pagina.');
+           return;
        }
+       
+       const nextPosition = getNextAvailablePosition();
+       if (!nextPosition) {
+           alert('Nessuna posizione disponibile nella griglia');
+           return;
+       }
+       
+       supplierCount++;
+       
+       const newCard = createSupplierCard(supplierCount);
+       newCard.data('grid-position', nextPosition);
+       
+       occupyGridPosition(nextPosition, newCard);
+       
+       updateCombinazioneOptions();
+       toggleCombinazioniSection();
+       updateAllTransferOptions();
    });
 
    $('#aggiungi-altra-destinazione').click(function() {
-       altraDestinazioneCount++;
-       const newCard = createAltraDestinazioneCard(altraDestinazioneCount);
-       const position = calculateGridPosition('destination');
-       
-       if (position) {
-           placeInGrid(newCard, position);
-           updateAllTransferOptions();
-       } else {
-           alert('Griglia piena! Rimuovi prima una destinazione esistente.');
-           altraDestinazioneCount--;
+       if (elementsCount >= maxElements) {
+           alert('Spazio esaurito! Massimo 8 elementi per pagina.');
+           return;
        }
+       
+       const nextPosition = getNextAvailablePosition();
+       if (!nextPosition) {
+           alert('Nessuna posizione disponibile nella griglia');
+           return;
+       }
+       
+       altraDestinazioneCount++;
+       
+       const newCard = createAltraDestinazioneCard(altraDestinazioneCount);
+       newCard.data('grid-position', nextPosition);
+       
+       occupyGridPosition(nextPosition, newCard);
+       
+       updateAllTransferOptions();
    });
 
-   // Eventi combinazioni con colori
-   $('#applica-combinazione-verde').click(() => applyCombination('verde'));
-   $('#reset-combinazione-verde').click(() => resetCombination('verde'));
-   $('#applica-combinazione-azzurro').click(() => applyCombination('azzurro'));
-   $('#reset-combinazione-azzurro').click(() => resetCombination('azzurro'));
-   $('#applica-combinazione-viola').click(() => applyCombination('viola'));
-   $('#reset-combinazione-viola').click(() => resetCombination('viola'));
+   // Eventi combinazioni
+   $('#applica-combinazione-verde').click(function() {
+       applyCombination('verde');
+   });
 
-   // Eventi salvataggio e caricamento file
-   $('#salva-file').click(() => saveToFile());
-   $('#carica-file').click(() => {
+   $('#reset-combinazione-verde').click(function() {
+       resetCombination('verde');
+   });
+
+   $('#applica-combinazione-azzurro').click(function() {
+       applyCombination('azzurro');
+   });
+
+   $('#reset-combinazione-azzurro').click(function() {
+       resetCombination('azzurro');
+   });
+
+   $('#applica-combinazione-viola').click(function() {
+       applyCombination('viola');
+   });
+
+   $('#reset-combinazione-viola').click(function() {
+       resetCombination('viola');
+   });
+
+   // Eventi salvataggio
+   $('#salva-file').click(function() {
+       saveToFile();
+   });
+
+   $('#carica-file').click(function() {
        if (confirm('Attenzione: il caricamento del file sovrascriverà tutti i dati attuali. Continuare?')) {
            loadFromFile();
        }
    });
 
-   $('#reset-programma').click(() => {
+   $('#reset-programma').click(function() {
        if (confirm('Attenzione: questa operazione cancellerà tutti i dati inseriti. Continuare?')) {
            location.reload();
        }
@@ -3194,9 +3117,9 @@ $(document).ready(function() {
 
    // Inizializzazione
    initCurrentDate();
-   updateSuppliersCount();
+   updateElementsCount();
 
-   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Layout griglia 4x2 con posizionamento logico fornitori/destinazioni');
+   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Layout griglia 4x2 con 8 posizioni');
 });
 </script>
 </body>
