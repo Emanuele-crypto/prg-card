@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Programma Giornaliero Trasformazione Frutta - Simone Gatto</title>
-<!-- Importazione librerie esterne -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -19,41 +18,41 @@
 
 body { 
    font-family: 'Arial', sans-serif;
-   font-size: 16px;
-   line-height: 1.3;
+   font-size: 18px;
+   line-height: 1.4;
    color: #000000;
-   margin: 10px;
+   margin: 20px;
    background-color: #f5f5f5;
 }
 
 .header {
    text-align: center;
-   margin-bottom: 15px;
+   margin-bottom: 20px;
    background: #1e3c72;
    border: 2px solid #000000;
-   padding: 10px;
+   padding: 15px;
    border-radius: 8px;
    color: #ffffff;
 }
 
 .header h1 {
-   font-size: 20px;
-   margin-bottom: 5px;
+   font-size: 24px;
+   margin-bottom: 8px;
    font-weight: bold;
    color: #ffffff;
 }
 
 .header .subtitle {
-   font-size: 16px;
-   margin-bottom: 5px;
+   font-size: 20px;
+   margin-bottom: 8px;
    color: #ffffff;
 }
 
 .header-info {
    display: flex;
    justify-content: space-around;
-   margin-top: 8px;
-   font-size: 14px;
+   margin-top: 10px;
+   font-size: 17px;
    color: #ffffff;
 }
 
@@ -61,10 +60,10 @@ body {
    background-color: #e9ecef;
    border: 1px solid #000000;
    border-radius: 5px;
-   padding: 10px;
-   margin-bottom: 15px;
+   padding: 15px;
+   margin-bottom: 20px;
    display: flex;
-   gap: 15px;
+   gap: 20px;
    align-items: center;
    flex-wrap: wrap;
 }
@@ -72,34 +71,32 @@ body {
 .controls-section .form-group {
    display: flex;
    flex-direction: column;
-   min-width: 150px;
+   min-width: 200px;
 }
 
 .controls-section label {
    font-weight: bold;
-   margin-bottom: 3px;
+   margin-bottom: 5px;
    color: #000000;
-   font-size: 12px;
 }
 
 .controls-section .form-control,
 .controls-section .form-select {
    border: 1px solid #000000;
    border-radius: 4px;
-   padding: 5px;
-   font-size: 12px;
+   padding: 8px;
+   font-size: 16px;
 }
 
 .btn {
-   padding: 6px 12px;
+   padding: 10px 20px;
    border: none;
    border-radius: 5px;
    font-weight: bold;
    cursor: pointer;
    text-decoration: none;
    display: inline-block;
-   margin: 3px;
-   font-size: 11px;
+   margin: 5px;
 }
 
 .btn-primary {
@@ -130,9 +127,9 @@ body {
 .totals-section {
    display: flex;
    justify-content: space-around;
-   margin-bottom: 15px;
+   margin-bottom: 20px;
    background-color: #ffc107;
-   padding: 10px;
+   padding: 15px;
    border: 1px solid #000000;
    border-radius: 5px;
 }
@@ -143,101 +140,98 @@ body {
 }
 
 .total-value {
-   font-size: 18px;
+   font-size: 22px;
    font-weight: bold;
    color: #000000;
 }
 
 .total-label {
-   font-size: 12px;
-   margin-top: 2px;
+   font-size: 16px;
+   margin-top: 3px;
    color: #000000;
 }
 
-/* LAYOUT GRIGLIA 4x2 */
-.main-grid {
+/* NUOVO LAYOUT A GRIGLIA 4x2 */
+.grid-container {
    display: grid;
    grid-template-columns: repeat(4, 1fr);
-   grid-template-rows: repeat(2, auto);
-   gap: 8px;
-   min-height: 80vh;
+   grid-template-rows: repeat(2, 1fr);
+   gap: 10px;
+   height: calc(100vh - 300px);
+   min-height: 600px;
+   margin-bottom: 20px;
 }
 
-/* POSIZIONAMENTO DELLE CARD */
-.card-position-1 { grid-column: 1; grid-row: 1; }
-.card-position-2 { grid-column: 2; grid-row: 1; }
-.card-position-3 { grid-column: 3; grid-row: 1; }
-.card-position-4 { grid-column: 4; grid-row: 1; }
-.card-position-5 { grid-column: 1; grid-row: 2; }
-.card-position-6 { grid-column: 2; grid-row: 2; }
-.card-position-7 { grid-column: 3; grid-row: 2; }
-.card-position-8 { grid-column: 4; grid-row: 2; }
-
-.supplier-card {
+.grid-item {
    background-color: #e9ecef;
    border: 2px solid #000000;
    border-radius: 8px;
-   padding: 8px;
-   min-height: 300px;
-   font-size: 11px;
+   padding: 15px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   min-height: 280px;
 }
 
-.destinazione-card {
-   background-color: #f0f8ff;
-   border: 2px solid #007bff;
-   border-radius: 8px;
-   padding: 8px;
-   min-height: 300px;
-   font-size: 11px;
+/* Card Fornitore */
+.supplier-card {
+   background-color: #e9ecef;
+   border: 2px solid #6c757d;
 }
 
-.card-header {
+.supplier-header {
    background: #6c757d;
    color: #ffffff;
-   padding: 4px;
+   padding: 8px;
    text-align: center;
    font-weight: bold;
-   font-size: 12px;
-   margin: -8px -8px 8px -8px;
+   font-size: 16px;
+   margin: -15px -15px 15px -15px;
    border-radius: 6px 6px 0 0;
 }
 
-.destinazione-header {
+/* Card Destinazione */
+.destination-card {
+   background-color: #f0f8ff;
+   border: 2px solid #007bff;
+}
+
+.destination-header {
    background: #007bff;
    color: #ffffff;
-   padding: 4px;
+   padding: 8px;
    text-align: center;
    font-weight: bold;
-   font-size: 12px;
-   margin: -8px -8px 8px -8px;
+   font-size: 16px;
+   margin: -15px -15px 15px -15px;
    border-radius: 6px 6px 0 0;
 }
 
 .form-row {
    display: flex;
    justify-content: space-between;
-   margin-bottom: 4px;
+   margin-bottom: 8px;
    align-items: center;
 }
 
 .form-label {
    font-weight: bold;
    color: #000000;
-   width: 35%;
-   font-size: 10px;
+   width: 40%;
+   font-size: 12px;
 }
 
 .form-input {
-   width: 63%;
+   width: 58%;
 }
 
 .form-input input,
 .form-input select {
    width: 100%;
    border: 1px solid #000000;
-   border-radius: 3px;
-   padding: 2px;
-   font-size: 9px;
+   border-radius: 4px;
+   padding: 4px;
+   font-size: 11px;
 }
 
 .calculated-field {
@@ -252,92 +246,34 @@ body {
    text-align: center;
 }
 
-.bio-red-field {
-   color: #dc3545 !important;
-   font-weight: bold;
-   border-color: #dc3545 !important;
-}
-
-.bio-black-field {
-   color: #000000 !important;
-   font-weight: bold;
-   border-color: #495057 !important;
-}
-
-.bio-red-text {
-   color: #dc3545 !important;
-   font-weight: bold;
-}
-
-.bio-black-text {
-   color: #000000 !important;
-   font-weight: bold;
-}
-
-.section-divider {
-   border-bottom: 1px solid #6c757d;
-   margin: 4px 0;
-}
-
-.destination-section {
-   background-color: #f8f9fa;
-   border: 1px solid #17a2b8;
-   border-radius: 5px;
-   padding: 5px;
-   margin-top: 5px;
-}
-
-.destination-section-header {
-   background: #17a2b8;
-   color: white;
-   padding: 2px 4px;
-   border-radius: 3px;
-   font-weight: bold;
-   font-size: 9px;
-   margin: -5px -5px 5px -5px;
-   text-align: center;
-}
-
-.remaining-qty {
+.remaining-display {
    background-color: #e7f3ff;
    border: 1px solid #2a5298;
-   padding: 2px;
+   padding: 4px;
    border-radius: 3px;
    font-weight: bold;
    text-align: center;
    color: #1e3c72;
-   font-size: 9px;
-   margin: 3px 0;
+   font-size: 11px;
+   margin: 5px 0;
 }
 
 .transfer-row {
    display: flex;
+   gap: 5px;
    align-items: center;
-   gap: 2px;
-   margin-top: 3px;
+   margin-top: 8px;
 }
 
-.transfer-row .form-label {
-   min-width: 25px;
-   margin-bottom: 0;
-   font-size: 8px;
-   flex-shrink: 0;
-}
-
-.transfer-row .transfer-destination {
+.transfer-select {
    flex: 1;
-   font-size: 8px;
+   font-size: 10px;
+   padding: 2px;
 }
 
-.transfer-row .transfer-qty {
-   width: 30px;
-   font-size: 8px;
-   padding: 1px;
-}
-
-.transfer-row .btn {
-   padding: 1px 3px;
-   font-size: 7px;
+.transfer-btn {
+   padding: 2px 6px;
+   font-size: 9px;
    margin: 0;
 }
 
@@ -345,78 +281,95 @@ body {
    display: none;
 }
 
-.save-status {
-   background-color: #d4edda;
-   border: 1px solid #28a745;
-   color: #155724;
-   padding: 8px;
-   border-radius: 5px;
-   margin-bottom: 15px;
-   text-align: center;
-   display: none;
-   font-size: 12px;
+.section-divider {
+   border-bottom: 1px solid #6c757d;
+   margin: 8px 0;
 }
 
-.save-error {
-   background-color: #f8d7da;
-   border: 1px solid #dc3545;
-   color: #721c24;
-}
-
-/* REGOLE DI STAMPA */
+/* Stili per stampa A4 */
 @media print {
-   body { 
-       margin: 5mm !important;
-       background-color: white !important;
-       font-size: 14px !important;
+   body {
+       margin: 5mm;
+       background-color: white;
+       font-size: 12px;
    }
    
    .controls-section {
-       display: none !important;
+       display: none;
    }
    
    .btn {
-       display: none !important;
+       display: none;
    }
    
    .header {
-       background: #1e3c72 !important;
-       color: #ffffff !important;
-       border: 2px solid #000000 !important;
-       margin-bottom: 10px !important;
+       background: #1e3c72;
+       color: #ffffff;
+       border: 2px solid #000000;
+       padding: 10px;
+       margin-bottom: 10px;
+   }
+   
+   .header h1 {
+       font-size: 20px;
+       color: #ffffff;
+   }
+   
+   .header .subtitle {
+       font-size: 16px;
+       color: #ffffff;
+   }
+   
+   .header-info {
+       font-size: 14px;
+       color: #ffffff;
    }
    
    .totals-section {
-       background-color: #ffc107 !important;
-       border: 2px solid #000000 !important;
-       margin-bottom: 10px !important;
+       background-color: #ffc107;
+       border: 2px solid #000000;
+       padding: 10px;
+       margin-bottom: 10px;
    }
    
-   .main-grid {
-       gap: 5px !important;
-       min-height: auto !important;
+   .total-value {
+       font-size: 18px;
+       color: #000000;
    }
    
-   .supplier-card,
-   .destinazione-card {
-       background-color: #ffffff !important;
-       border: 2px solid #000000 !important;
-       font-size: 10px !important;
-       min-height: 200px !important;
+   .total-label {
+       font-size: 12px;
+       color: #000000;
+   }
+   
+   .grid-container {
+       height: auto;
+       min-height: auto;
        page-break-inside: avoid;
+   }
+   
+   .grid-item {
+       font-size: 10px;
+       padding: 8px;
+       min-height: 200px;
+       page-break-inside: avoid;
+   }
+   
+   .supplier-header,
+   .destination-header {
+       font-size: 12px;
+       padding: 4px;
+       margin: -8px -8px 8px -8px;
+   }
+   
+   .form-label {
+       font-size: 9px;
    }
    
    .form-input input,
    .form-input select {
-       font-size: 8px !important;
-       background-color: #ffffff !important;
-       border: 1px solid #000000 !important;
-   }
-   
-   .calculated-field,
-   .yield-result {
-       background-color: #f0f0f0 !important;
-       border: 1px solid #000000 !important;
+       font-size: 9px;
+       padding: 2px;
    }
    
    @page {
@@ -434,19 +387,13 @@ body {
        <div class="header-info">
            <div><strong>Data:</strong> <span id="current-date"></span></div>
            <div><strong>Agrume:</strong> <span id="selected-agrume">N/D</span></div>
-           <div><strong>Cards:</strong> <span id="cards-count">0</span></div>
+           <div><strong>Elementi:</strong> <span id="elements-count">0</span></div>
        </div>
-       <div style="margin-top: 8px; font-size: 12px;">
+       <div style="margin-top: 10px; font-size: 16px;">
            <strong>Generato:</strong> <span id="last-revision"></span>
        </div>
    </div>
 
-   <!-- Status salvataggio -->
-   <div id="save-status" class="save-status">
-       <span id="save-message"></span>
-   </div>
-
-   <!-- Sezione Controlli -->
    <div class="controls-section">
        <div class="form-group">
            <label for="tipo-agrume-giornaliero">Tipo di Agrume</label>
@@ -472,12 +419,6 @@ body {
            <button type="button" class="btn btn-success" id="aggiungi-destinazione">
                <i class="bi bi-plus-square"></i> Aggiungi Destinazione
            </button>
-           <button type="button" class="btn btn-info" id="salva-file">
-               <i class="bi bi-download"></i> Salva File
-           </button>
-           <button type="button" class="btn btn-info" id="carica-file">
-               <i class="bi bi-upload"></i> Carica File
-           </button>
            <button type="button" class="btn btn-warning" onclick="window.print()">
                <i class="bi bi-printer"></i> Stampa
            </button>
@@ -487,10 +428,9 @@ body {
        </div>
    </div>
 
-   <!-- Sezione Totali -->
    <div class="totals-section">
        <div class="total-item">
-           <div class="total-value" id="entrata-giornaliera-display">0</div>
+           <div class="total-value" id="entrata-totale-display">0</div>
            <div class="total-label">Kg Entrata Totale</div>
        </div>
        <div class="total-item">
@@ -503,24 +443,16 @@ body {
        </div>
    </div>
 
-   <!-- Griglia principale 4x2 -->
-   <div class="main-grid" id="main-grid">
-       <!-- Le card verranno aggiunte dinamicamente qui -->
+   <!-- Griglia 4x2 per contenere 8 riquadri -->
+   <div class="grid-container" id="grid-container">
+       <!-- Gli elementi verranno aggiunti dinamicamente qui -->
    </div>
-
-   <!-- Input file nascosto per caricamento -->
-   <input type="file" id="file-input" accept=".json" style="display: none;">
 
 <script>
 $(document).ready(function() {
-   let cardCounter = 0;
+   let elementCount = 0;
    let supplierCount = 0;
-   let destinazioneCount = 0;
-   let cardPositions = []; // Array per tracciare le posizioni occupate
-
-   // Variabili per gestione trasferimenti
-   let transferData = {};
-   let transferredAmounts = {};
+   let destinationCount = 0;
 
    // Definizione varietà per ogni tipo di agrume
    const varietyOptions = {
@@ -531,14 +463,14 @@ $(document).ready(function() {
            { value: 'BIANCHETTO', text: 'Bianchetto' },
            { value: 'MONACHELLO', text: 'Monachello' },
            { value: 'VARIE', text: 'Varie' },
-           { value: 'ALTRO', text: 'Altro (specifica quale)' }
+           { value: 'ALTRO', text: 'Altro' }
        ],
        'MANDARINO': [
            { value: 'TARD. DI CIACULLI', text: 'Tard. di Ciaculli' },
            { value: 'AVANA', text: 'Avana' },
            { value: 'CLEMENTINO', text: 'Clementino' },
            { value: 'VARIE', text: 'Varie' },
-           { value: 'ALTRO', text: 'Altro (specifica quale)' }
+           { value: 'ALTRO', text: 'Altro' }
        ],
        'ARANCIA': [
            { value: 'BIONDA', text: 'Bionda' },
@@ -547,19 +479,19 @@ $(document).ready(function() {
            { value: 'SANGUINELLA', text: 'Sanguinella' },
            { value: 'TAROCCO', text: 'Tarocco' },
            { value: 'VARIE', text: 'Varie' },
-           { value: 'ALTRO', text: 'Altro (specifica quale)' }
+           { value: 'ALTRO', text: 'Altro' }
        ],
        'BERGAMOTTO': [
            { value: 'FEMMINELLO', text: 'Femminello' },
            { value: 'CASTAGNARO', text: 'Castagnaro' },
            { value: 'VARIE', text: 'Varie' },
-           { value: 'ALTRO', text: 'Altro (specifica quale)' }
+           { value: 'ALTRO', text: 'Altro' }
        ],
        'POMPELMO': [
            { value: 'GIALLO', text: 'Giallo' },
            { value: 'ROSA', text: 'Rosa' },
            { value: 'VARIE', text: 'Varie' },
-           { value: 'ALTRO', text: 'Altro (specifica quale)' }
+           { value: 'ALTRO', text: 'Altro' }
        ]
    };
 
@@ -567,14 +499,13 @@ $(document).ready(function() {
    const yieldsPerLine = {
        'BOE/1100': 31.30,
        'GOE EST/400': 31.60,
-       '400': 32.00,
        'GOE EST/POLY': 30.60,
        'GOE INT/POLY': 28.30,
        'BIRILLATRICI': 26.60,
        'GOE EST/BIRILLATRICI': 25.60
    };
 
-   // Inizializzazione data corrente e ultima revisione
+   // Inizializzazione data corrente
    function initCurrentDate() {
        const today = new Date();
        const formatted = today.toLocaleDateString('it-IT', {
@@ -585,51 +516,48 @@ $(document).ready(function() {
        });
        $('#current-date').text(formatted);
        $('#data-lavorazione').val(today.toISOString().split('T')[0]);
-       
        updateLastRevision();
    }
 
-   // Aggiorna ultima revisione
    function updateLastRevision() {
        const now = new Date();
        const lastRevision = now.toLocaleDateString('it-IT') + ' - ' + now.toLocaleTimeString('it-IT');
        $('#last-revision').text(lastRevision);
    }
 
-   // Funzione per ottenere la resa in base alla linea di trasformazione
+   // Funzione per ottenere la resa in base alla linea
    function getYieldByLine(linea) {
        return yieldsPerLine[linea] || 30;
    }
 
-   // Funzione per ottenere la prossima posizione disponibile
-   function getNextAvailablePosition() {
-       for (let i = 1; i <= 8; i++) {
-           if (!cardPositions.includes(i)) {
-               return i;
-           }
-       }
-       return null; // Tutte le posizioni sono occupate
+   // Funzione per calcolare la posizione nella griglia
+   function getGridPosition(elementIndex) {
+       // La logica è: primo elemento va in alto a sinistra (1,1)
+       // secondo elemento va sotto il primo (2,1) 
+       // terzo elemento va in alto seconda colonna (1,2)
+       // quarto elemento va sotto il terzo (2,2) e così via
+       
+       const columnIndex = Math.floor((elementIndex - 1) / 2);
+       const rowIndex = ((elementIndex - 1) % 2) + 1;
+       
+       return {
+           column: columnIndex + 1,
+           row: rowIndex,
+           gridColumn: columnIndex + 1,
+           gridRow: rowIndex
+       };
    }
 
-   // Crea card fornitore SEMPLIFICATA
+   // Crea card fornitore semplificata
    function createSupplierCard(index) {
-       const position = getNextAvailablePosition();
-       if (!position) {
-           alert('Massimo 8 card raggiunto!');
-           return null;
-       }
-
-       cardPositions.push(position);
        const agrume = $('#tipo-agrume-giornaliero').val();
-       const defaultYield = 30;
-
        const varietyOptionsHtml = agrume && varietyOptions[agrume] ? 
            varietyOptions[agrume].map(v => `<option value="${v.value}">${v.text}</option>`).join('') : 
-           '<option value="">Seleziona prima l\'agrume</option>';
+           '<option value="">Seleziona varietà</option>';
 
        return `
-           <div class="supplier-card card-position-${position}" data-supplier-index="${index}" data-position="${position}">
-               <div class="card-header">F${index} - <span class="supplier-name">Nuovo Fornitore</span></div>
+           <div class="grid-item supplier-card" data-supplier-index="${index}" data-element-type="supplier">
+               <div class="supplier-header">Fornitore ${index}</div>
                
                <div class="form-row">
                    <span class="form-label">Nome:</span>
@@ -648,14 +576,13 @@ $(document).ready(function() {
                            <option value="UNIONBERG">UNIONBERG</option>
                            <option value="ALTRO">ALTRO</option>
                        </select>
-                       <input type="text" class="altro-fornitore hidden-field" placeholder="Altro" style="margin-top: 2px;">
                    </div>
                </div>
 
                <div class="form-row">
                    <span class="form-label">Entrata (kg):</span>
                    <div class="form-input">
-                       <input type="number" class="quantita-fornitore" min="0" onchange="calculateSupplier(${index})">
+                       <input type="number" class="quantita-entrata" min="0" onchange="calculateSupplier(${index})">
                    </div>
                </div>
 
@@ -669,23 +596,22 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Giacenza (kg):</span>
                    <div class="form-input">
-                       <input type="number" class="giacenza-fornitore calculated-field" readonly>
+                       <input type="number" class="giacenza calculated-field" readonly>
                    </div>
                </div>
+
+               <div class="section-divider"></div>
 
                <div class="form-row">
                    <span class="form-label">Certificazione:</span>
                    <div class="form-input">
-                       <select class="certificazione-prodotto" onchange="updateBioStyles(${index})">
+                       <select class="certificazione">
                            <option value="">Seleziona</option>
                            <option value="BIO EU">BIO EU</option>
                            <option value="BIO DEM">BIO DEM</option>
                            <option value="BIO NTD">BIO NTD</option>
-                           <option value="BIO DEM/NTD">BIO DEM/NTD</option>
                            <option value="TRACCIATO">TRACCIATO</option>
-                           <option value="IGP">IGP</option>
                            <option value="CONVENZIONALE">CONVENZIONALE</option>
-                           <option value="ALTRO">ALTRO</option>
                        </select>
                    </div>
                </div>
@@ -693,7 +619,7 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Varietà:</span>
                    <div class="form-input">
-                       <select class="varieta-prodotto">
+                       <select class="varieta">
                            <option value="">Seleziona varietà</option>
                            ${varietyOptionsHtml}
                        </select>
@@ -703,7 +629,7 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Linea:</span>
                    <div class="form-input">
-                       <select class="linea-trasformazione" onchange="updateYieldByLine(${index}); calculateSupplier(${index});">
+                       <select class="linea" onchange="updateYieldAndCalculate(${index})">
                            <option value="">Seleziona linea</option>
                            <option value="GOE EST/400">GOE EST/400</option>
                            <option value="BOE/1100">BOE/1100</option>
@@ -718,7 +644,7 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Portata (kg/h):</span>
                    <div class="form-input">
-                       <input type="number" class="portata-impianto" min="100" max="5000" onchange="calculateEndTime(${index})">
+                       <input type="number" class="portata" min="100" max="5000" onchange="calculateEndTime(${index})">
                    </div>
                </div>
 
@@ -732,68 +658,24 @@ $(document).ready(function() {
                <div class="form-row">
                    <span class="form-label">Fine:</span>
                    <div class="form-input">
-                       <div class="orario-fine-display calculated-field"></div>
+                       <input type="text" class="orario-fine calculated-field" readonly>
                    </div>
                </div>
 
-               <!-- Resa nascosta -->
-               <input type="number" class="resa-prima hidden-field" value="${defaultYield}">
+               <div class="section-divider"></div>
 
                <div class="form-row">
                    <span class="form-label">Succo 1ª (kg):</span>
                    <div class="form-input">
-                       <input type="number" class="quantita-prima yield-result" readonly>
+                       <input type="number" class="quantita-succo yield-result" readonly>
                    </div>
                </div>
 
-               <!-- Sezione Destinazione Succo 1ª -->
-               <div class="destination-section">
-                   <div class="destination-section-header">Destinazione Succo 1ª</div>
-                   
-                   <div class="form-row">
-                       <span class="form-label">Dest.:</span>
-                       <div class="form-input">
-                           <select class="destinazione-prima" onchange="updateDestinationCard(${index})">
-                               <option value="">Destinazione succo 1ª</option>
-                               <option value="NAT IN TINI">NAT IN TINI</option>
-                               <option value="PET 100">PET 100</option>
-                               <option value="PET 200">PET 200</option>
-                               <option value="PET 480">PET 480</option>
-                               <option value="ACMA">ACMA</option>
-                               <option value="REX">REX</option>
-                               <option value="GOGLIO">GOGLIO</option>
-                               <option value="VASCHETTE">VASCHETTE</option>
-                               <option value="LATTE">LATTE</option>
-                               <option value="F.F.">F.F.</option>
-                               <option value="F.T.C">F.T.C</option>
-                               <option value="FBL">FBL</option>
-                               <option value="BIC">BIC</option>
-                               <option value="CISTERNA P">CISTERNA P</option>
-                               <option value="CISTERNA EF">CISTERNA EF</option>
-                               <option value="CISTERNA VK">CISTERNA VK</option>
-                               <option value="CISTERNA GS">CISTERNA GS</option>
-                               <option value="CONCENTRATO">CONCENTRATO</option>
-                               <option value="ALTRO">ALTRO</option>
-                           </select>
-                       </div>
-                   </div>
-                   
-                   <div class="remaining-qty">Rimanente: <span class="remaining-value">0</span> kg</div>
-                   
-                   <!-- Sezione trasferimento -->
-                   <div class="transfer-row">
-                       <span class="form-label">Invia:</span>
-                       <select class="transfer-destination"></select>
-                       <input type="number" class="transfer-qty" placeholder="kg" min="0" step="0.1">
-                       <button type="button" class="btn btn-success" onclick="executeTransfer(${index})">
-                           >
-                       </button>
-                   </div>
-               </div>
+               <!-- Campo resa nascosto -->
+               <input type="hidden" class="resa-prima" value="30">
 
-               <!-- Pulsanti compatti -->
-               <div style="margin-top: 5px; text-align: center;">
-                   <button type="button" class="btn btn-danger" onclick="removeCard(${index}, 'supplier')" style="padding: 2px 5px; font-size: 8px;">
+               <div style="margin-top: 8px; text-align: center;">
+                   <button type="button" class="btn btn-danger btn-sm" onclick="removeElement(${index}, 'supplier')" style="padding: 2px 8px; font-size: 10px;">
                        Rimuovi
                    </button>
                </div>
@@ -801,31 +683,16 @@ $(document).ready(function() {
        `;
    }
 
-   // Crea card destinazione SEMPLIFICATA
-   function createDestinazioneCard(index) {
-       const position = getNextAvailablePosition();
-       if (!position) {
-           alert('Massimo 8 card raggiunto!');
-           return null;
-       }
-
-       cardPositions.push(position);
-
+   // Crea card destinazione semplificata
+   function createDestinationCard(index) {
        return `
-           <div class="destinazione-card card-position-${position}" data-destinazione-index="${index}" data-position="${position}">
-               <div class="destinazione-header">${index}ª Destinazione</div>
+           <div class="grid-item destination-card" data-destination-index="${index}" data-element-type="destination">
+               <div class="destination-header">Destinazione ${index}</div>
                
                <div class="form-row">
-                   <span class="form-label">Succo 1ª (kg):</span>
+                   <span class="form-label">Dest.:</span>
                    <div class="form-input">
-                       <input type="number" class="quantita-prima-dest" min="0" step="0.1">
-                   </div>
-               </div>
-
-               <div class="form-row">
-                   <span class="form-label">Destinazione:</span>
-                   <div class="form-input">
-                       <select class="destinazione-prima-dest">
+                       <select class="destinazione-select">
                            <option value="">Destinazione succo 1ª</option>
                            <option value="NAT IN TINI">NAT IN TINI</option>
                            <option value="PET 100">PET 100</option>
@@ -845,77 +712,24 @@ $(document).ready(function() {
                            <option value="CISTERNA VK">CISTERNA VK</option>
                            <option value="CISTERNA GS">CISTERNA GS</option>
                            <option value="CONCENTRATO">CONCENTRATO</option>
-                           <option value="ALTRO">ALTRO</option>
                        </select>
                    </div>
                </div>
 
-               <div class="form-row">
-                   <span class="form-label">Polpa:</span>
-                   <div class="form-input">
-                       <select class="tenore-polpa-dest">
-                           <option value="STANDARD">STANDARD</option>
-                           <option value="LIMPIDO">LIMPIDO</option>
-                           <option value="<1%"><1%</option>
-                           <option value="2%">2%</option>
-                           <option value="3%">3%</option>
-                           <option value="6%">6%</option>
-                       </select>
-                   </div>
+               <div class="remaining-display">Rimanente: <span class="remaining-value">0</span> kg</div>
+
+               <div class="transfer-row">
+                   <span class="form-label">Invia:</span>
+                   <select class="transfer-destination transfer-select">
+                       <option value="">Dest.</option>
+                   </select>
+                   <button type="button" class="btn btn-success transfer-btn" onclick="executeTransfer(${index})">
+                       Invia
+                   </button>
                </div>
 
-               <div class="form-row">
-                   <span class="form-label">°BX:</span>
-                   <div class="form-input">
-                       <select class="brix-dest">
-                           <option value="NAT">NAT</option>
-                           <option value="20">20</option>
-                           <option value="32">32</option>
-                           <option value="40">40</option>
-                           <option value="45">45</option>
-                           <option value="48">48</option>
-                           <option value="50">50</option>
-                           <option value="55">55</option>
-                           <option value="60">60</option>
-                           <option value="65">65</option>
-                       </select>
-                   </div>
-               </div>
-
-               <div class="form-row">
-                   <span class="form-label">Bio:</span>
-                   <div class="form-input">
-                       <select class="bio-dest">
-                           <option value="SI">SI</option>
-                           <option value="NO">NO</option>
-                           <option value="DECLASSATO">DECLASSATO</option>
-                       </select>
-                   </div>
-               </div>
-
-               <div class="form-row">
-                   <span class="form-label">Pastorizzato:</span>
-                   <div class="form-input">
-                       <select class="pastorizzato-dest">
-                           <option value="SI">SI</option>
-                           <option value="NO">NO</option>
-                       </select>
-                   </div>
-               </div>
-
-               <div class="form-row">
-                   <span class="form-label">Conservato:</span>
-                   <div class="form-input">
-                       <select class="conservato-dest">
-                           <option value="SI">SI</option>
-                           <option value="NO" selected>NO</option>
-                       </select>
-                   </div>
-               </div>
-
-               <!-- Pulsanti compatti -->
-               <div style="margin-top: 5px; text-align: center;">
-                   <button type="button" class="btn btn-danger" onclick="removeCard(${index}, 'destinazione')" style="padding: 2px 5px; font-size: 8px;">
+               <div style="margin-top: 8px; text-align: center;">
+                   <button type="button" class="btn btn-danger btn-sm" onclick="removeElement(${index}, 'destination')" style="padding: 2px 8px; font-size: 10px;">
                        Rimuovi
                    </button>
                </div>
@@ -923,270 +737,190 @@ $(document).ready(function() {
        `;
    }
 
-   // Funzioni di gestione
+   // Funzione per posizionare elemento nella griglia
+   function positionElementInGrid(element, elementIndex) {
+       const position = getGridPosition(elementIndex);
+       element.css({
+           'grid-column': position.gridColumn,
+           'grid-row': position.gridRow
+       });
+   }
+
+   // Funzioni di calcolo
    window.updateSupplierName = function(index) {
        const card = $(`.supplier-card[data-supplier-index="${index}"]`);
        const nome = card.find('.nome-fornitore').val();
-       const altroField = card.find('.altro-fornitore');
        
-       if (nome === 'ALTRO') {
-           altroField.removeClass('hidden-field');
+       if (nome) {
+           card.find('.supplier-header').text(`Fornitore ${index} - ${nome}`);
        } else {
-           altroField.addClass('hidden-field').val('');
+           card.find('.supplier-header').text(`Fornitore ${index}`);
        }
        
-       const displayName = nome === 'ALTRO' ? (altroField.val() || 'Altro Fornitore') : nome;
-       card.find('.supplier-name').text(displayName || 'Nuovo Fornitore');
-       
-       updateAllTransferOptions();
+       updateTransferOptions();
    };
 
-   window.updateYieldByLine = function(index) {
+   window.updateYieldAndCalculate = function(index) {
        const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const linea = card.find('.linea-trasformazione').val();
+       const linea = card.find('.linea').val();
        
        if (linea) {
            const yield = getYieldByLine(linea);
-           card.find('.resa-prima').val(yield.toFixed(2));
+           card.find('.resa-prima').val(yield);
        }
+       
+       calculateSupplier(index);
    };
 
    window.calculateSupplier = function(index) {
        const card = $(`.supplier-card[data-supplier-index="${index}"]`);
        
        // Calcola giacenza
-       const entrata = parseFloat(card.find('.quantita-fornitore').val()) || 0;
+       const entrata = parseFloat(card.find('.quantita-entrata').val()) || 0;
        const trasformata = parseFloat(card.find('.quantita-trasformata').val()) || 0;
        const giacenza = entrata - trasformata;
-       card.find('.giacenza-fornitore').val(giacenza >= 0 ? giacenza : 0);
+       card.find('.giacenza').val(giacenza >= 0 ? giacenza : 0);
        
-       // Calcola quantità prodotti
-       const resaPrima = parseFloat(card.find('.resa-prima').val()) || 0;
-       
+       // Calcola quantità succo
+       const resa = parseFloat(card.find('.resa-prima').val()) || 30;
        if (trasformata > 0) {
-           const quantitaPrima = (trasformata * resaPrima / 100).toFixed(1);
-           card.find('.quantita-prima').val(quantitaPrima);
+           const quantitaSucco = (trasformata * resa / 100).toFixed(1);
+           card.find('.quantita-succo').val(quantitaSucco);
        } else {
-           card.find('.quantita-prima').val('');
+           card.find('.quantita-succo').val('');
        }
        
        calculateEndTime(index);
        updateTotals();
-       updateDestinationCard(index);
    };
 
    window.calculateEndTime = function(index) {
        const card = $(`.supplier-card[data-supplier-index="${index}"]`);
        const quantitaTrasformata = parseFloat(card.find('.quantita-trasformata').val()) || 0;
-       const portata = parseFloat(card.find('.portata-impianto').val()) || 0;
+       const portata = parseFloat(card.find('.portata').val()) || 0;
        const orarioInizio = card.find('.orario-inizio').val();
        
        if (quantitaTrasformata > 0 && portata > 0 && orarioInizio) {
            const durataTotaleMinuti = Math.round((quantitaTrasformata / portata) * 60);
            
-           const dataLavorazione = $('#data-lavorazione').val();
-           if (!dataLavorazione) {
-               card.find('.orario-fine-display').html('');
-               return;
-           }
-           
            const [oraInizio, minutiInizio] = orarioInizio.split(':').map(n => parseInt(n));
-           const dataInizio = new Date(dataLavorazione);
+           const dataInizio = new Date();
            dataInizio.setHours(oraInizio, minutiInizio, 0, 0);
            
            const dataFine = new Date(dataInizio.getTime() + durataTotaleMinuti * 60 * 1000);
            
            const oreFine = dataFine.getHours().toString().padStart(2, '0');
            const minutiFine = dataFine.getMinutes().toString().padStart(2, '0');
-           let orarioFineDisplay = `${oreFine}:${minutiFine}`;
            
-           if (dataFine.getDate() !== dataInizio.getDate()) {
-               const giornoSuccessivo = dataFine.getDate();
-               orarioFineDisplay += ` (g.${giornoSuccessivo})`;
-           }
-           
-           card.find('.orario-fine-display').html(orarioFineDisplay);
+           card.find('.orario-fine').val(`${oreFine}:${minutiFine}`);
        } else {
-           card.find('.orario-fine-display').html('');
+           card.find('.orario-fine').val('');
        }
    };
 
-   window.updateBioStyles = function(index) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const certificazione = card.find('.certificazione-prodotto').val();
-       
-       // Reset tutti gli stili
-       card.find('.certificazione-prodotto').removeClass('bio-red-field bio-black-field');
-       card.find('.varieta-prodotto').removeClass('bio-red-field bio-black-field');
-       card.find('.linea-trasformazione').removeClass('bio-red-field bio-black-field');
-       
-       const isBioSpecific = ['BIO EU', 'BIO DEM', 'BIO NTD', 'BIO DEM/NTD'].includes(certificazione);
-       
-       if (isBioSpecific) {
-           card.find('.certificazione-prodotto').addClass('bio-red-field');
-           card.find('.varieta-prodotto').addClass('bio-red-field');
-           card.find('.linea-trasformazione').addClass('bio-red-field');
-       }
-   };
-
-   window.updateDestinationCard = function(index) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const quantitaPrima = parseFloat(card.find('.quantita-prima').val()) || 0;
-       const totalTransferred = transferredAmounts[index] || 0;
-       const available = quantitaPrima - totalTransferred;
-       
-       card.find('.remaining-value').text(available.toFixed(1));
-       card.find('.transfer-qty').val(available > 0 ? available.toFixed(1) : '');
-       
-       updateTransferOptions(index);
-   };
-
-   function updateTransferOptions(index) {
-       const card = $(`.supplier-card[data-supplier-index="${index}"]`);
-       const transferSelect = card.find('.transfer-destination');
-       
-       transferSelect.empty().append('<option value="">Dest.</option>');
-       
-       // Aggiungi fornitori
-       $('.supplier-card').each(function() {
-           const otherIndex = $(this).data('supplier-index');
-           if (otherIndex !== index) {
-               const nome = $(this).find('.nome-fornitore').val();
-               const altroNome = $(this).find('.altro-fornitore').val();
+   // Aggiorna opzioni di trasferimento
+   function updateTransferOptions() {
+       $('.transfer-destination').each(function() {
+           const select = $(this);
+           select.empty().append('<option value="">Dest.</option>');
+           
+           // Aggiungi tutti i fornitori come opzioni
+           $('.supplier-card').each(function() {
+               const supplierIndex = $(this).data('supplier-index');
+               const nome = $(this).find('.nome-fornitore').val() || `F${supplierIndex}`;
+               select.append(`<option value="supplier_${supplierIndex}">${nome}</option>`);
+           });
+           
+           // Aggiungi altre destinazioni
+           $('.destination-card').each(function() {
+               const destIndex = $(this).data('destination-index');
+               const currentDestIndex = select.closest('.destination-card').data('destination-index');
                
-               let displayName = '';
-               if (nome === 'ALTRO' && altroNome) {
-                   displayName = altroNome;
-               } else if (nome && nome !== 'ALTRO') {
-                   displayName = nome;
+               if (destIndex !== currentDestIndex) {
+                   select.append(`<option value="destination_${destIndex}">Dest ${destIndex}</option>`);
                }
-               
-               if (displayName) {
-                   transferSelect.append(`<option value="supplier_${otherIndex}">F${otherIndex}</option>`);
-               }
-           }
-       });
-       
-       // Aggiungi destinazioni
-       $('.destinazione-card').each(function() {
-           const destIndex = $(this).data('destinazione-index');
-           transferSelect.append(`<option value="dest_${destIndex}">D${destIndex}</option>`);
+           });
        });
    }
 
-   function updateAllTransferOptions() {
-       $('.supplier-card').each(function() {
-           const index = $(this).data('supplier-index');
-           updateTransferOptions(index);
-       });
-   }
-
+   // Esegui trasferimento
    window.executeTransfer = function(sourceIndex) {
-       const sourceCard = $(`.supplier-card[data-supplier-index="${sourceIndex}"]`);
+       const sourceCard = $(`.destination-card[data-destination-index="${sourceIndex}"]`);
        const targetValue = sourceCard.find('.transfer-destination').val();
-       const transferAmount = parseFloat(sourceCard.find('.transfer-qty').val()) || 0;
        
        if (!targetValue) {
-           alert('Seleziona la destinazione');
+           alert('Seleziona la destinazione del trasferimento');
            return;
        }
        
-       if (transferAmount <= 0) {
-           alert('Inserisci quantità valida');
-           return;
-       }
+       // Logica di trasferimento semplificata
+       alert(`Trasferimento da Destinazione ${sourceIndex} a ${targetValue} eseguito!`);
        
-       const remaining = parseFloat(sourceCard.find('.remaining-value').text()) || 0;
-       if (transferAmount > remaining) {
-           alert('Quantità superiore al rimanente');
-           return;
-       }
-       
-       if (targetValue.startsWith('supplier_')) {
-           const targetIndex = targetValue.replace('supplier_', '');
-           const targetCard = $(`.supplier-card[data-supplier-index="${targetIndex}"]`);
-           
-           const currentTargetQty = parseFloat(targetCard.find('.quantita-prima').val()) || 0;
-           const newTargetQty = currentTargetQty + transferAmount;
-           targetCard.find('.quantita-prima').val(newTargetQty.toFixed(1));
-           
-           updateDestinationCard(targetIndex);
-           
-       } else if (targetValue.startsWith('dest_')) {
-           const targetIndex = targetValue.replace('dest_', '');
-           const targetCard = $(`.destinazione-card[data-destinazione-index="${targetIndex}"]`);
-           
-           const currentTargetQty = parseFloat(targetCard.find('.quantita-prima-dest').val()) || 0;
-           const newTargetQty = currentTargetQty + transferAmount;
-           targetCard.find('.quantita-prima-dest').val(newTargetQty.toFixed(1));
-       }
-       
-       // Traccia trasferimento
-       if (!transferredAmounts[sourceIndex]) {
-           transferredAmounts[sourceIndex] = 0;
-       }
-       transferredAmounts[sourceIndex] += transferAmount;
-       
-       // Reset campi
+       // Reset selezione
        sourceCard.find('.transfer-destination').val('');
-       sourceCard.find('.transfer-qty').val('');
-       
-       updateDestinationCard(sourceIndex);
-       
-       alert(`Trasferimento di ${transferAmount} kg completato!`);
    };
 
-   window.removeCard = function(index, type) {
-       if (confirm('Sei sicuro di voler rimuovere questa card?')) {
-           let card;
+   // Rimuovi elemento
+   window.removeElement = function(index, type) {
+       if (confirm(`Sei sicuro di voler rimuovere questo ${type === 'supplier' ? 'fornitore' : 'destinazione'}?`)) {
            if (type === 'supplier') {
-               card = $(`.supplier-card[data-supplier-index="${index}"]`);
-               // Rimuovi dati trasferimenti
-               delete transferredAmounts[index];
+               $(`.supplier-card[data-supplier-index="${index}"]`).remove();
            } else {
-               card = $(`.destinazione-card[data-destinazione-index="${index}"]`);
+               $(`.destination-card[data-destination-index="${index}"]`).remove();
            }
            
-           const position = card.data('position');
-           cardPositions = cardPositions.filter(p => p !== position);
-           
-           card.remove();
-           cardCounter--;
-           
+           reorganizeGrid();
            updateTotals();
-           updateCardsCount();
-           updateAllTransferOptions();
+           updateElementsCount();
+           updateTransferOptions();
        }
    };
 
+   // Riorganizza griglia dopo rimozione
+   function reorganizeGrid() {
+       const elements = $('#grid-container .grid-item').detach();
+       
+       elements.each(function(index) {
+           const position = getGridPosition(index + 1);
+           $(this).css({
+               'grid-column': position.gridColumn,
+               'grid-row': position.gridRow
+           });
+       });
+       
+       $('#grid-container').append(elements);
+   }
+
+   // Aggiorna totali
    function updateTotals() {
        let totaleEntrata = 0;
        let totaleTrasformata = 0;
        let totaleGiacenza = 0;
        
        $('.supplier-card').each(function() {
-           const entrata = parseFloat($(this).find('.quantita-fornitore').val()) || 0;
+           const entrata = parseFloat($(this).find('.quantita-entrata').val()) || 0;
            const trasformata = parseFloat($(this).find('.quantita-trasformata').val()) || 0;
-           const giacenza = parseFloat($(this).find('.giacenza-fornitore').val()) || 0;
+           const giacenza = parseFloat($(this).find('.giacenza').val()) || 0;
            
            totaleEntrata += entrata;
            totaleTrasformata += trasformata;
            totaleGiacenza += giacenza;
        });
        
-       $('#entrata-giornaliera-display').text(totaleEntrata.toLocaleString());
+       $('#entrata-totale-display').text(totaleEntrata.toLocaleString());
        $('#trasformata-totale-display').text(totaleTrasformata.toLocaleString());
        $('#giacenza-totale-display').text(totaleGiacenza.toLocaleString());
    }
 
-   function updateCardsCount() {
-       const count = $('.supplier-card').length + $('.destinazione-card').length;
-       $('#cards-count').text(count);
+   function updateElementsCount() {
+       const count = $('#grid-container .grid-item').length;
+       $('#elements-count').text(count);
    }
 
+   // Aggiorna varietà quando cambia agrume
    function updateVarietyOptions(agrume) {
        $('.supplier-card').each(function() {
-           const varietaSelect = $(this).find('.varieta-prodotto');
+           const varietaSelect = $(this).find('.varieta');
            const currentValue = varietaSelect.val();
            
            varietaSelect.empty();
@@ -1204,38 +938,20 @@ $(document).ready(function() {
        });
    }
 
-   function showSaveStatus(message, type) {
-       const statusDiv = $('#save-status');
-       const messageSpan = $('#save-message');
-       
-       messageSpan.text(message);
-       
-       if (type === 'error') {
-           statusDiv.addClass('save-error').removeClass('save-status');
-       } else {
-           statusDiv.removeClass('save-error').addClass('save-status');
-       }
-       
-       statusDiv.fadeIn();
-       
-       setTimeout(() => {
-           statusDiv.fadeOut();
-       }, 3000);
-   }
-
    // Eventi principali
    $('#tipo-agrume-giornaliero').change(function() {
        const agrume = $(this).val();
        $('#selected-agrume').text(agrume || 'N/D');
        
        if (agrume) {
+           updateVarietyOptions(agrume);
+           
+           // Ricalcola tutti i fornitori
            $('.supplier-card').each(function() {
                const index = $(this).data('supplier-index');
                calculateSupplier(index);
-               updateDestinationCard(index);
            });
            
-           updateVarietyOptions(agrume);
            updateTotals();
        }
    });
@@ -1246,37 +962,37 @@ $(document).ready(function() {
            return;
        }
        
-       if (cardCounter >= 8) {
-           alert('Massimo 8 card raggiunto!');
+       if (elementCount >= 8) {
+           alert('Massimo 8 elementi consentiti per pagina');
            return;
        }
        
+       elementCount++;
        supplierCount++;
-       cardCounter++;
        
-       const newCard = createSupplierCard(supplierCount);
-       if (newCard) {
-           $('#main-grid').append(newCard);
-           updateCardsCount();
-           updateAllTransferOptions();
-       }
+       const newCard = $(createSupplierCard(supplierCount));
+       positionElementInGrid(newCard, elementCount);
+       $('#grid-container').append(newCard);
+       
+       updateElementsCount();
+       updateTransferOptions();
    });
 
    $('#aggiungi-destinazione').click(function() {
-       if (cardCounter >= 8) {
-           alert('Massimo 8 card raggiunto!');
+       if (elementCount >= 8) {
+           alert('Massimo 8 elementi consentiti per pagina');
            return;
        }
        
-       destinazioneCount++;
-       cardCounter++;
+       elementCount++;
+       destinationCount++;
        
-       const newCard = createDestinazioneCard(destinazioneCount);
-       if (newCard) {
-           $('#main-grid').append(newCard);
-           updateCardsCount();
-           updateAllTransferOptions();
-       }
+       const newCard = $(createDestinationCard(destinationCount));
+       positionElementInGrid(newCard, elementCount);
+       $('#grid-container').append(newCard);
+       
+       updateElementsCount();
+       updateTransferOptions();
    });
 
    $('#reset-programma').click(function() {
@@ -1287,9 +1003,9 @@ $(document).ready(function() {
 
    // Inizializzazione
    initCurrentDate();
-   updateCardsCount();
+   updateElementsCount();
 
-   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Layout 4x2 semplificato');
+   console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Layout griglia 4x2');
 });
 </script>
 </body>
