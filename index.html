@@ -469,7 +469,7 @@ body {
    margin-bottom: 15px;
 }
 
-/* STILI STAMPA */
+/* STILI STAMPA - MODIFICATO PER ORIENTAMENTO ORIZZONTALE */
 @media print {
    body { 
        margin: 8mm !important;
@@ -515,7 +515,7 @@ body {
    
    @page {
        margin: 10mm;
-       size: A4 portrait;
+       size: A4 landscape; /* MODIFICATO: orientamento orizzontale */
    }
 }
 </style>
@@ -657,7 +657,6 @@ body {
 
 <script>
 $(document).ready(function() {
-   let cardCount = 0;
    let fornitoriData = {};
    let destinazioniData = {};
    let transferData = {};
@@ -713,23 +712,176 @@ $(document).ready(function() {
        $('#elements-count').text(count);
    }
 
-   // Funzione per ottenere la posizione successiva (logica sopra-sotto-sopra-sotto)
-   function getNextPosition() {
-       cardCount++;
+   // MODIFICATO: Funzione per ottenere la posizione successiva disponibile
+   function getNextAvailablePosition() {
+       const occupiedPositions = new Set();
        
-       // Calcola colonna e riga in base al numero della card
-       // Card 1,2 -> colonna 1; Card 3,4 -> colonna 2; Card 5,6 -> colonna 3; Card 7,8 -> colonna 4
-       const column = Math.ceil(cardCount / 2);
-       // Card dispari -> riga 1; Card pari -> riga 2
-       const row = (cardCount % 2 === 1) ? 1 : 2;
+       $('#main-grid .supplier-card, #main-grid .destination-card').each(function() {
+           const classes = $(this).attr('class').split(' ');
+           for (let className of classes) {
+               if (className.startsWith('card-position-')) {
+                   const position = parseInt(className.replace('card-position-', ''));
+                   occupiedPositions.add(position);
+               }
+           }
+       });
        
-       if (column > 4) {
-           alert('Massimo 8 elementi supportati (4 colonne x 2 righe)');
-           cardCount--;
-           return null;
+       // Trova la prima posizione libera da 1 a 8
+       for (let i = 1; i <= 8; i++) {
+           if (!occupiedPositions.has(i)) {
+               return i;
+           }
        }
        
-       return cardCount;
+       alert('Massimo 8 elementi supportati (4 colonne x 2 righe)');
+       return null;
+   }
+
+   // MODIFICATO: Funzione per riorganizzare le card dopo l'eliminazione
+   function reorganizeCards() {
+       const allCards = $('#main-grid .supplier-card, #main-grid .destination-card').get();
+       
+       // Ordina le card per posizione attuale
+       allCards.sort(function(a, b) {
+           const posA = getCardPosition($(a));
+           const posB = getCardPosition($(b));
+           return posA - posB;
+       });
+       
+       // Riassegna posizioni e numeri in sequenza
+       let supplierCounter = 1;
+       let destinationCounter = 1;
+       
+       allCards.forEach(function(cardElement, index) {
+           const $card = $(cardElement);
+           const newPosition = index + 1;
+           
+           // Rimuovi vecchia classe posizione
+           const classes = $card.attr('class').split(' ');
+           classes.forEach(className => {
+               if (className.startsWith('card-position-')) {
+                   $card.removeClass(className);
+               }
+           });
+           
+           // Aggiungi nuova classe posizione
+           $card.addClass(`card-position-${newPosition}`);
+           
+           // Aggiorna numero card e data-card-index
+           if ($card.hasClass('supplier-card')) {
+               const oldIndex = $card.data('card-index');
+               $card.attr('data-card-index', supplierCounter);
+               $card.data('card-index', supplierCounter);
+               
+               // Aggiorna header
+               const nome = $card.find('.nome-fornitore').val();
+               if (nome && nome !== '') {
+                   $card.find('.card-header').text(`F${supplierCounter} - ${nome}`);
+               } else {
+                   $card.find('.card-header').text(`Fornitore ${supplierCounter}`);
+               }
+               
+               // Aggiorna riferimenti nei dati globali
+               updateDataReferences(oldIndex, supplierCounter, 'supplier');
+               
+               supplierCounter++;
+           } else if ($card.hasClass('destination-card')) {
+               const oldIndex = $card.data('card-index');
+               $card.attr('data-card-index', destinationCounter);
+               $card.data('card-index', destinationCounter);
+               
+               // MODIFICATO: Aggiorna header con numerazione corretta (1ª, 2ª, etc.)
+               $card.find('.dest-card-header').text(`${destinationCounter}ª Destinazione`);
+               
+               // Aggiorna ID provenienza
+               const oldProvenienzaId = `provenienza-${oldIndex}`;
+               const newProvenienzaId = `provenienza-${destinationCounter}`;
+               $card.find(`#${oldProvenienzaId}`).attr('id', newProvenienzaId);
+               
+               // Aggiorna riferimenti nei dati globali
+               updateDataReferences(oldIndex, destinationCounter, 'destination');
+               
+               destinationCounter++;
+           }
+       });
+       
+       updateElementsCount();
+       updateCombinazioneOptions();
+       updateTransferOptions();
+   }
+
+   // Funzione helper per ottenere la posizione attuale di una card
+   function getCardPosition($card) {
+       const classes = $card.attr('class').split(' ');
+       for (let className of classes) {
+           if (className.startsWith('card-position-')) {
+               return parseInt(className.replace('card-position-', ''));
+           }
+       }
+       return 999; // fallback
+   }
+
+   // NUOVO: Funzione per aggiornare i riferimenti nei dati globali
+   function updateDataReferences(oldIndex, newIndex, cardType) {
+       if (oldIndex === newIndex) return;
+       
+       if (cardType === 'supplier') {
+           // Aggiorna fornitoriData
+           if (fornitoriData[oldIndex]) {
+               fornitoriData[newIndex] = fornitoriData[oldIndex];
+               delete fornitoriData[oldIndex];
+           }
+           
+           // Aggiorna transferredAmounts
+           if (transferredAmounts[oldIndex]) {
+               transferredAmounts[newIndex] = transferredAmounts[oldIndex];
+               delete transferredAmounts[oldIndex];
+           }
+           
+           // Aggiorna transferData
+           if (transferData[oldIndex]) {
+               transferData[newIndex] = transferData[oldIndex];
+               delete transferData[oldIndex];
+           }
+           
+           // Aggiorna riferimenti in transferData di altre card
+           Object.keys(transferData).forEach(key => {
+               transferData[key] = transferData[key].map(transfer => {
+                   if (transfer.fromCard === oldIndex) {
+                       transfer.fromCard = newIndex;
+                   }
+                   return transfer;
+               });
+           });
+           
+           // Aggiorna combinationData
+           ['verde', 'azzurro', 'viola'].forEach(color => {
+               const indexPos = combinationData[color].indexes.indexOf(oldIndex);
+               if (indexPos > -1) {
+                   combinationData[color].indexes[indexPos] = newIndex;
+               }
+               
+               combinationData[color].details = combinationData[color].details.map(detail => {
+                   if (detail.cardIndex === oldIndex) {
+                       detail.cardIndex = newIndex;
+                   }
+                   return detail;
+               });
+           });
+           
+       } else if (cardType === 'destination') {
+           // Aggiorna destinazioniData
+           if (destinazioniData[oldIndex]) {
+               destinazioniData[newIndex] = destinazioniData[oldIndex];
+               delete destinazioniData[oldIndex];
+           }
+           
+           // Aggiorna provenienzaData
+           if (provenienzaData[oldIndex]) {
+               provenienzaData[newIndex] = provenienzaData[oldIndex];
+               delete provenienzaData[oldIndex];
+           }
+       }
    }
 
    // Crea card fornitore semplificata
@@ -744,7 +896,7 @@ $(document).ready(function() {
        }
 
        return `
-           <div class="supplier-card card-position-${cardIndex}" data-card-index="${cardIndex}" data-card-type="supplier">
+           <div class="supplier-card card-position-${getNextAvailablePosition()}" data-card-index="${cardIndex}" data-card-type="supplier">
                <div class="card-header">Fornitore ${cardIndex}</div>
                
                <div class="form-row">
@@ -932,11 +1084,16 @@ $(document).ready(function() {
        `;
    }
 
-   // Crea card destinazione semplificata
-   function createDestinationCard(cardIndex) {
+   // MODIFICATO: Crea card destinazione con numerazione corretta
+   function createDestinationCard() {
+       // Conta quante destinazioni esistono già per determinare il numero
+       const existingDestinations = $('.destination-card').length;
+       const destinationNumber = existingDestinations + 1;
+       const cardIndex = destinationNumber;
+
        return `
-           <div class="destination-card card-position-${cardIndex}" data-card-index="${cardIndex}" data-card-type="destination">
-               <div class="dest-card-header">${cardIndex}ª Destinazione</div>
+           <div class="destination-card card-position-${getNextAvailablePosition()}" data-card-index="${cardIndex}" data-card-type="destination">
+               <div class="dest-card-header">${destinationNumber}ª Destinazione</div>
                
                <!-- Provenienza -->
                <div class="provenienza-info" id="provenienza-${cardIndex}">
@@ -1749,7 +1906,7 @@ $(document).ready(function() {
        }
    };
 
-   // Rimuovi card
+   // MODIFICATO: Rimuovi card con riorganizzazione
    window.removeCard = function(cardIndex) {
        if (confirm('Rimuovere questa card?')) {
            // Rimuovi riferimenti dalle combinazioni
@@ -1777,11 +1934,13 @@ $(document).ready(function() {
                );
            });
            
+           // NUOVO: Riorganizza le card rimanenti
+           reorganizeCards();
+           
            updateTotals();
            updateCombinazioneOptions();
            toggleCombinazioniSection();
            updateTransferOptions();
-           updateElementsCount();
        }
    };
 
@@ -1967,28 +2126,44 @@ $(document).ready(function() {
        transferData = data.transferData || {};
        transferredAmounts = data.transferredAmounts || {};
        provenienzaData = data.provenienzaData || {};
+       combinationData = data.combinationData || { verde:
+          function loadDataFromObject(data) {
+       // Ripristina dati base
+       $('#tipo-agrume').val(data.tipoAgrume || '');
+       $('#data-lavorazione').val(data.dataLavorazione || '');
+       $('#selected-agrume').text(data.tipoAgrume || 'N/D');
+       
+       // Ripristina dati globali
+       transferData = data.transferData || {};
+       transferredAmounts = data.transferredAmounts || {};
+       provenienzaData = data.provenienzaData || {};
        combinationData = data.combinationData || { verde: { indexes: [], details: [] }, azzurro: { indexes: [], details: [] }, viola: { indexes: [], details: [] } };
        fornitoriData = data.fornitoriData || {};
        destinazioniData = data.destinazioniData || {};
        
        // Rimuovi card esistenti
        $('#main-grid').empty();
-       cardCount = 0;
        
        // Ripristina cards nell'ordine corretto
        if (data.cards && data.cards.length > 0) {
            // Ordina per cardIndex
            data.cards.sort((a, b) => a.cardIndex - b.cardIndex);
            
-           data.cards.forEach(cardData => {
-               const cardIndex = cardData.cardIndex;
-               if (cardIndex > cardCount) cardCount = cardIndex;
+           let supplierCounter = 1;
+           let destinationCounter = 1;
+           
+           data.cards.forEach((cardData, index) => {
+               const position = index + 1;
                
                if (cardData.cardType === 'supplier') {
-                   const newCard = createSupplierCard(cardIndex);
+                   const newCard = createSupplierCard(supplierCounter);
                    $('#main-grid').append(newCard);
                    
-                   const card = $(`.supplier-card[data-card-index="${cardIndex}"]`);
+                   const card = $(`.supplier-card:last`);
+                   card.removeClass('card-position-' + getNextAvailablePosition());
+                   card.addClass(`card-position-${position}`);
+                   card.attr('data-card-index', supplierCounter);
+                   card.data('card-index', supplierCounter);
                    
                    // Ripristina tutti i dati del fornitore
                    card.find('.nome-fornitore').val(cardData.nome || '');
@@ -2044,13 +2219,18 @@ $(document).ready(function() {
                        card.find('.succo-prima').addClass('received-transfer');
                    }
                    
-                   updateSupplier(cardIndex);
+                   updateSupplier(supplierCounter);
+                   supplierCounter++;
                    
                } else if (cardData.cardType === 'destination') {
-                   const newCard = createDestinationCard(cardIndex);
+                   const newCard = createDestinationCard();
                    $('#main-grid').append(newCard);
                    
-                   const card = $(`.destination-card[data-card-index="${cardIndex}"]`);
+                   const card = $(`.destination-card:last`);
+                   card.removeClass('card-position-' + getNextAvailablePosition());
+                   card.addClass(`card-position-${position}`);
+                   card.attr('data-card-index', destinationCounter);
+                   card.data('card-index', destinationCounter);
                    
                    // Ripristina dati destinazione
                    card.find('.quantita-prima-dest').val(cardData.quantitaPrima || '');
@@ -2081,14 +2261,15 @@ $(document).ready(function() {
                    }
                    
                    // Ripristina provenienza
-                   if (provenienzaData[cardIndex]) {
-                       const provenienzaText = provenienzaData[cardIndex]
+                   if (provenienzaData[destinationCounter]) {
+                       const provenienzaText = provenienzaData[destinationCounter]
                            .map(p => `${p.fornitore}: ${p.quantita}kg`)
                            .join(', ');
-                       $(`#provenienza-${cardIndex}`).text(`Provenienza: ${provenienzaText}`);
+                       $(`#provenienza-${destinationCounter}`).text(`Provenienza: ${provenienzaText}`);
                    }
                    
-                   updateDestBioStyles(cardIndex);
+                   updateDestBioStyles(destinationCounter);
+                   destinationCounter++;
                }
            });
        }
@@ -2162,16 +2343,21 @@ $(document).ready(function() {
        updateTotals();
    });
 
+   // MODIFICATO: Aggiungi fornitore con numerazione automatica
    $('#aggiungi-fornitore').click(function() {
        if (!$('#tipo-agrume').val()) {
            alert('Seleziona prima il tipo di agrume');
            return;
        }
        
-       const position = getNextPosition();
+       const position = getNextAvailablePosition();
        if (position === null) return;
        
-       const newCard = createSupplierCard(position);
+       // Conta quanti fornitori esistono già per determinare il numero
+       const existingSuppliers = $('.supplier-card').length;
+       const supplierNumber = existingSuppliers + 1;
+       
+       const newCard = createSupplierCard(supplierNumber);
        $('#main-grid').append(newCard);
        
        updateElementsCount();
@@ -2181,10 +2367,10 @@ $(document).ready(function() {
    });
 
    $('#aggiungi-destinazione').click(function() {
-       const position = getNextPosition();
+       const position = getNextAvailablePosition();
        if (position === null) return;
        
-       const newCard = createDestinationCard(position);
+       const newCard = createDestinationCard();
        $('#main-grid').append(newCard);
        
        updateElementsCount();
@@ -2441,7 +2627,6 @@ $(document).ready(function() {
 
    // Funzione di debug per sviluppatori (rimovere in produzione)
    window.debugInfo = function() {
-       console.log('Card Count:', cardCount);
        console.log('Fornitori Data:', fornitoriData);
        console.log('Destinazioni Data:', destinazioniData);
        console.log('Transfer Data:', transferData);
@@ -2476,8 +2661,12 @@ $(document).ready(function() {
    });
 
    console.log('Sistema Programma Giornaliero Trasformazione inizializzato - Layout 4x2 con posizionamento sopra-sotto');
+   console.log('Modifiche applicate:');
+   console.log('- Stampa in orientamento orizzontale');
+   console.log('- Prima destinazione inizia con "1ª Destinazione"');
+   console.log('- Riorganizzazione automatica delle card dopo eliminazione');
    console.log('Tasti scorciatoia: Ctrl+S (Salva), Ctrl+O (Apri), Ctrl+P (Stampa), Ctrl+N (Nuovo Fornitore), Ctrl+M (Nuova Destinazione)');
 });
 </script>
 </body>
-</html>           
+</html>
